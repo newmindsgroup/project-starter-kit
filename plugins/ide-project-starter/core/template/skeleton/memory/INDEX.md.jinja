@@ -1,0 +1,9 @@
+# Memory index
+
+Version-Timestamp: {{ version_timestamp }}
+
+- STATE.md: current-state entry.
+- checkpoints/: objective, constraints, decisions, completed work, recorded checks, blockers, next action and external-action receipts.
+- learning/: source-linked observations, proposed improvements and protected drafts, created when used.
+
+Each checkpoint links to source digests and the previous checkpoint. These detect accidental drift; they are not signed approvals. Avoid transcript dumps and secrets. Checkpoints do not automatically execute or repeat external actions.

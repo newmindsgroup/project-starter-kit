@@ -1,0 +1,17 @@
+# Version-Timestamp: 2026-09-08 13:00:00 AST
+_subdirectory: skeleton
+name:
+  type: str
+profile:
+  type: str
+  choices: [business, software]
+objective:
+  type: str
+audience:
+  type: str
+constraints:
+  type: json
+success_criteria:
+  type: json
+version_timestamp:
+  type: str

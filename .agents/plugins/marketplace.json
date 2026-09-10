@@ -1,0 +1,20 @@
+{
+  "name": "project-starter-kit",
+  "interface": {
+    "displayName": "Project Starter Kit by Daniel Gonell"
+  },
+  "plugins": [
+    {
+      "name": "ide-project-starter",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ide-project-starter"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

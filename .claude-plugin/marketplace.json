@@ -1,0 +1,17 @@
+{
+  "name": "project-starter-kit",
+  "owner": {
+    "name": "Daniel Gonell"
+  },
+  "metadata": {
+    "description": "Project setup and portable memory by Daniel Gonell"
+  },
+  "plugins": [
+    {
+      "name": "ide-project-starter",
+      "source": "./plugins/ide-project-starter",
+      "description": "Set up, adopt and resume projects with portable records.",
+      "version": "0.6.0"
+    }
+  ]
+}

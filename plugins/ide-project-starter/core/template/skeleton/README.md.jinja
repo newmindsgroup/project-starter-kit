@@ -1,0 +1,16 @@
+# {{ name }}
+
+Version-Timestamp: {{ version_timestamp }}
+Profile: {{ profile }}
+
+Start with PROJECT.md and context/INDEX.md. Recover the latest recorded state with:
+
+```sh
+python3 -B .starter/project_memory.py resume
+```
+
+Use workflows/start-project.md, workflows/resume-project.md and workflows/checkpoint-project.md and workflows/review-project.md. This folder contains portable records and local Python helpers. Python 3.10 or newer is required; Copier is needed only by the initializer in the starter-kit workspace.
+
+Existing originals remain in place. The context register must be completed before relying on this project's initial state. No automatic capture, external action, skill activation or installed IDE hook is provided.
+
+Project skills: starter-resume, starter-checkpoint and starter-review are included in .agents/skills (Codex) and .claude/skills (Claude Code). If discovery is unavailable, read the selected SKILL.md explicitly. The installation receipt records generated file hashes. Skills and helpers stay at the installed version until a reviewed upgrade.

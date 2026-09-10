@@ -1,0 +1,7 @@
+# Current-state entry
+
+Version-Timestamp: {{ version_timestamp }}
+
+The latest immutable checkpoint under memory/checkpoints/ is the authoritative recorded working state. Run `python3 -B .starter/project_memory.py resume` to validate its chain and read it. This file is a stable pointer, not a second editable state summary.
+
+If Python is unavailable, inspect the highest numbered checkpoint and its predecessors manually, report validation as unavailable, and do not assume the record is current. Follow workflows/resume-project.md.

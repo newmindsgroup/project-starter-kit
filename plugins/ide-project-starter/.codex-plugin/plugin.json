@@ -1,0 +1,22 @@
+{
+  "author": {
+    "name": "Daniel Gonell"
+  },
+  "description": "Set up development projects with an agent-assisted wizard, preserved files and resumable work.",
+  "interface": {
+    "capabilities": [
+      "Project onboarding",
+      "Checkpoint recovery",
+      "Learning review"
+    ],
+    "category": "Productivity",
+    "defaultPrompt": "Use project-starter to start, adopt or resume this authorized project.",
+    "developerName": "Daniel Gonell",
+    "displayName": "IDE Project Starter",
+    "longDescription": "Set up development projects with an agent-assisted wizard, preserved files and resumable work.",
+    "shortDescription": "Start and resume projects with durable context."
+  },
+  "name": "ide-project-starter",
+  "skills": "./skills/",
+  "version": "0.6.0"
+}

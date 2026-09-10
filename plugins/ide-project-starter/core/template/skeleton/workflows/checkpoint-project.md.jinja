@@ -1,0 +1,16 @@
+# Checkpoint project
+
+Version-Timestamp: {{ version_timestamp }}
+
+Run resume first and retain its head digest. Prepare an input JSON file inside this project containing exactly: objective (text), constraints (list), decisions (list), completed (list), checks (list), blockers (list), next_action (text), external_actions (list), sources (list of relative file paths).
+
+Record actual commands/results and evidence paths in checks. They are recorded claims, not checks executed by this helper. Distinguish accepted decisions from proposals. External-action entries must state the receipt or unresolved outcome and must not contain credentials. Sources should include changed decision/brief documents needed to resume.
+
+Run:
+
+```sh
+python3 -B .starter/project_memory.py checkpoint --input checkpoint-input.json --expected-head HEAD_FROM_RESUME
+python3 -B .starter/project_memory.py resume
+```
+
+A stale head or competing write requires a fresh read and reconciliation. Do not blindly retry. Never edit saved checkpoints. Preserve corrupt or interrupted artifacts for investigation; recovery requires trusted originals or a reviewed migration. Store hashes are not signatures, distributed locks or verified backups.

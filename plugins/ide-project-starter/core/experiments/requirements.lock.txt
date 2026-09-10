@@ -1,0 +1,23 @@
+# Version-Timestamp: 2026-09-08 12:33:37 AST
+# Synthetic experiment environment, not a production dependency approval.
+annotated-types==0.8.0
+colorama==0.4.6
+copier==9.18.2
+dunamai==1.26.2
+funcy==2.0
+jinja2==3.1.6
+jinja2-ansible-filters==1.3.2
+markupsafe==3.0.3
+packaging==26.3
+pathspec==1.1.1
+platformdirs==4.11.7
+plumbum==2.0.2
+prompt-toolkit==3.0.53
+pydantic==2.13.5
+pydantic-core==2.46.5
+pygments==2.21.0
+pyyaml==6.0.3
+questionary==2.1.1
+typing-extensions==4.16.0
+typing-inspection==0.4.4
+wcwidth==0.8.3

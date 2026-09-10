@@ -1,0 +1,17 @@
+# Review project learning
+
+Version-Timestamp: {{ version_timestamp }}
+
+1. Run `python3 -B .starter/project_learning.py validate` and `python3 -B .starter/project_learning.py status`. Resolve stale evidence before proposing dependent changes.
+2. Review meaningful corrections, failed checks and repeated procedures. Record an observation only when backed by a project file. Use `observe --input observation-input.json` with event_id, run_id, summary and sources. Keep raw credentials, unrelated client information and transcripts out.
+3. Read config/learning-skills.json and inspect the skills actually available in the current tool. Match purpose, inputs, outputs and authority. Do not claim a listed skill is installed without checking. Review every catalog entry for a skill proposal; identify additional real matches when relevant.
+4. Choose memory_correction, lesson, reuse_skill, update_skill, new_skill, check or no_change. Prepare a proposal with id, kind, title, reason, evidence (observation IDs), skill_review (id, disposition, reason for each catalog entry), evaluation_plan and rollback. Run `propose --input proposal-input.json`. A new_skill proposal must explain why all comparisons are no_fit. This is structural validation, not semantic approval.
+5. Run `review --proposal ID`. If warranted, create a staging Markdown draft and run `draft --proposal ID --file PATH`. Execute permitted baseline and candidate checks and save actual results separately; do not invent an outcome or automatically install a skill.
+6. Report the smallest justified improvement, evidence, duplicates avoided, missing evaluation and next action. The CLI supports rejection/retirement with `close`, but no acceptance or activation. Any later installation needs scoped authorization and a tested artifact. Checkpoint meaningful findings.
+
+All commands in steps 3 to 6 use `python3 -B .starter/project_learning.py` from the project root. Serialize learning lifecycle operations. If evidence is weak or no useful improvement exists, say so rather than creating a skill to meet a quota.
+
+
+After onboarding/adoption, a meaningful milestone or a verified correction, record a pilot report with .starter/project_feedback.py report. Its input contains id, event_id, mode (new/adopt/resume/upgrade), outcome (pass/partial/fail), lesson, scope (project/kit) and sources. Keep raw evidence here.
+
+For reusable lessons, follow the trusted toolkit's docs/KIT-IMPROVEMENT.md. Explicitly review a sanitized export summary before setting approved_for_kit:true. Export does not submit or publish it. A kit-maintainer may import the approved packet into the deduplicated inbox and follow the release checklist. Do not copy client details into the kit or silently install proposed changes.

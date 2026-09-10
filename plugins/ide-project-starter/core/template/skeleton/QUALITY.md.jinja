@@ -1,0 +1,20 @@
+# Project quality requirements
+
+Version-Timestamp: {{ version_timestamp }}
+Status: project-specific acceptance criteria and commands need configuration.
+
+Profile: {{ profile }}.
+{% if profile == 'software' %}
+Document the real test, lint, typecheck, build and security commands after inspecting the actual stack. No application framework or fabricated passing check is supplied by this template.
+{% else %}
+Document evidence sources, assumption checks, decision criteria and review responsibilities. Software tests are not a substitute for business evidence.
+{% endif %}
+
+Continuity checks available now:
+
+```sh
+python3 -B .starter/project_memory.py resume
+python3 -B .starter/project_learning.py validate
+```
+
+A successful continuity check does not prove project readiness or software correctness. For releases and consequential actions, run actual applicable checks, perform required independent review, and record recovery steps. Resolve missing global configuration and applicable routing requirements before relying on them.

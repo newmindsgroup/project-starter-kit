@@ -1,0 +1,11 @@
+# Storage and portability
+
+Version-Timestamp: {{ version_timestamp }}
+
+Original client materials stay in their approved cloud folder or source provider. The approved repository contains project instructions, code/deliverables appropriate for its audience, reviewed context summaries, decisions, checkpoints, helper scripts and setup definitions. Credentials belong in an approved secret store. Disposable environments and caches belong outside synced folders where possible.
+
+Before work, record cloud-source location/audience, repository location/audience, memory destination, approved summary/snapshot scope and local tooling destination in context/INDEX.md. Unknown sharing is unresolved. A private repo is not automatic permission to copy client data; use a separate approved private records workspace when the code repo's audience differs.
+
+Reference original sources with access-safe links, dates, coverage and refresh instructions. Keep approved summaries here; include exact text snapshots only when authorized. The current helper hashes local text, not remote provider changes. Repo-only recovery must report missing source access rather than inventing current facts.
+
+.gitignore does not prevent cloud sync. Saving a checkpoint does not push Git. Each project needs its own explicit backup arrangement. On another machine, clone approved records, authenticate to sources, recreate tools and run resume before action.
