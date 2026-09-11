@@ -1,17 +1,34 @@
 # Release validation and acceptance limits
 
-Version-Timestamp: 2026-09-10 18:27:14 AST
+Version-Timestamp: 2026-09-11 16:04:41 AST
 
-Version 0.6.0 is a supervised pilot. The generic setup inspector and the existing new/adopt/resume helpers are included. Framework detection is advisory.
+Version 0.7.0 is a supervised pilot. It renames nested starter records to lowercase, adds a migration for projects created with 0.6, cleans up generated Markdown, and adds line-ending protection for starter records. The setup inspector and the new, adopt and resume helpers from 0.6.0 are unchanged in purpose.
 
-The private source retains raw test and review evidence. It is not copied into this public release because it can contain development paths and account metadata. This public summary reports outcomes without exposing those records.
+The private source keeps the raw test and review evidence. It is not copied here, because it can contain development paths and account metadata. This summary reports outcomes only.
 
-Release preparation checks cover the Python suite, deterministic package parity, public-export tests, local documentation links, targeted private-pattern scans, plugin manifest validation and desktop/mobile README rendering. The source suite passed all 199 tests, including eight public-export tests.
+## Checks run for this release
 
-CLI help was checked with Codex 0.149.1 and Claude Code 2.1.261. Desktop and mobile README previews were inspected; all three graphics loaded and the mobile page fit its viewport.
+- The source suite passed 231 tests on macOS. One test, which needs a case-sensitive filesystem, was skipped there.
+- Continuous integration passed the same suite on Linux with Python 3.10 and Python 3.14. On Linux the case-sensitive test ran.
+- The learning-code import gate, learning-record validation and plugin package parity checks all passed.
+- A freshly generated project has no nested uppercase names and no double blank lines in its Markdown.
+- Every relative link in the kit's live documentation resolves with exact letter case.
+- A fictional project was adopted using only the scripts in this public release, from an anonymous clone. Resume recovered its state, and its original files were preserved.
 
-Earlier wizard verification passed 191 source tests. Its independent review returned Claude Fable 5.1; follow-up inspector/package tests passed after the truncated-directory recovery fix. The public publication review returned Claude Opus 5. Two follow-up exporter regressions were demonstrated failing and then fixed; all 10 focused export tests passed. The full 199-test result predates those two additions. Eight package tests and one adoption rehearsal from the public staging layout passed.
+## Independent review
 
-Still unverified: an independent non-developer completing onboarding without assistance, a physical second computer, Windows initialization, all possible filesystems, and complete sensitive-data classification. A same-machine helper or clone rehearsal is not proof of those outcomes.
+An independent review before release found six defects in the new migration and adoption paths, two of them release blockers. All six are fixed and covered by regression tests. A second independent review verified the fixes by reproducing each original failure, including crash and tamper tests. It found one remaining gap and three minor points, which were then fixed.
+
+## Still unverified
+
+The following have not been demonstrated:
+
+- an independent non-developer completing onboarding without assistance
+- a physical second computer
+- Windows initialization
+- every possible filesystem
+- complete classification of sensitive data
+
+A helper or clone rehearsal on the same machine does not prove those outcomes.
 
 The package adds no background observer, network API integration, automatic publication or automatic project upgrades. Existing project tests, source access and backup arrangements remain project responsibilities.

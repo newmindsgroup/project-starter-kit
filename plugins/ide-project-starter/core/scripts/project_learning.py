@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Version-Timestamp: 2026-09-08 13:05:52 AST
+# Version-Timestamp: 2026-09-11 14:52:59 AST
 """Local learning records and review packets. No model, network, or activation API."""
 import argparse
 import hashlib
@@ -17,6 +17,39 @@ RECORD_ROOT = 'memory/learning'
 KINDS = {'memory_correction', 'lesson', 'reuse_skill', 'update_skill', 'new_skill', 'check', 'no_change'}
 SKILL_KINDS = {'reuse_skill', 'update_skill', 'new_skill'}
 SECRET = re.compile(r'(?:\bsk-[A-Za-z0-9_-]{16,}|\bgh[pors]_[A-Za-z0-9]{16,}|\bgithub_pat_[A-Za-z0-9_]{16,}|-----BEGIN [A-Z ]*PRIVATE KEY-----)')
+
+# Kit records renamed to lowercase in 0.7.0. Uppercase stays only for root-level
+# documents and for names a tool requires. See docs/naming-conventions.md.
+LEGACY_LAYOUT = {
+    'context/INDEX.md': 'context/index.md',
+    'context/STORAGE.md': 'context/storage.md',
+    'memory/INDEX.md': 'memory/index.md',
+    'memory/STATE.md': 'memory/state.md',
+    'business/WORK.md': 'business/work.md',
+    'software/WORK.md': 'software/work.md',
+}
+
+
+def exact_exists(root, relative):
+    """True only when every segment exists with exactly this case.
+
+    The default macOS and Windows filesystems are case-insensitive, so an
+    ordinary existence check finds context/index.md while only
+    context/INDEX.md is on disk."""
+    current = Path(root)
+    for part in Path(relative).parts:
+        try:
+            names = os.listdir(current)
+        except (FileNotFoundError, NotADirectoryError):
+            return False
+        if part not in names:
+            return False
+        current = current / part
+    return True
+
+
+def shown_path(relative):
+    return '[redacted path]' if SECRET.search(str(relative)) else str(relative)
 
 class Invalid(ValueError):
     """A failed record invariant, without echoing untrusted values."""
@@ -117,7 +150,10 @@ class Store:
                 handle.flush()
                 os.fsync(handle.fileno())
             self.path(relative)
-            os.link(temp, p)
+            try:
+                os.link(temp, p)
+            except FileExistsError as error:
+                raise FileExistsError(error.errno, 'Target already exists; choose a new name or preserve it', shown_path(relative)) from None
         finally:
             temp.unlink(missing_ok=True)
 

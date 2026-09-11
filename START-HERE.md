@@ -24,7 +24,7 @@ Do not mix scripts from this checkout with a different plugin version. Do not ex
 
 ## 2. Inspect and understand
 
-Read the canonical entry skill and its included guides: CORE/docs/SETUP-WIZARD.md, CLIENT-ONBOARDING.md, INTAKE.md and STORAGE-BOUNDARIES.md. Use the public [command guide](docs/COMMANDS.md) for this distribution's actual paths. Some bundled guides preserve earlier development-relative examples or historical evidence references. Their TOOLKIT/KIT execution root means CORE here. Do not treat an unavailable historical report as evidence; current public acceptance is in VALIDATION.md.
+Read the canonical entry skill and its included guides: CORE/docs/setup-wizard.md, client-onboarding.md, intake.md and storage-boundaries.md. Use the public [command guide](docs/commands.md) for this distribution's actual paths. Some bundled guides preserve earlier development-relative examples or historical evidence references. Their TOOLKIT/KIT execution root means CORE here. Do not treat an unavailable historical report as evidence; current public acceptance is in VALIDATION.md.
 
 Run the trusted read-only setup inspector against the selected project. Treat its route and framework hints as advisory. Establish its actual Git root, worktree state, source folders, audiences and memory destination. Do not inspect unrelated sibling projects.
 
@@ -62,4 +62,4 @@ Future sessions read the generated project's AGENTS.md or CLAUDE.md and local sk
 
 ## Optional tool-wide installation
 
-Only install the plugin when the user asks for tool-wide availability. Project setup is the default. Follow [INSTALL.md](docs/INSTALL.md), inspect existing marketplace registrations and preserve unrelated configuration. Do not add hooks, MCP servers, global instruction replacements or new model accounts as setup side effects.
+Only install the plugin when the user asks for tool-wide availability. Project setup is the default. Follow [install.md](docs/install.md), inspect existing marketplace registrations and preserve unrelated configuration. Do not add hooks, MCP servers, global instruction replacements or new model accounts as setup side effects.

@@ -76,8 +76,8 @@ def render(spec,project_id,timestamp,scratch=None):
         target_store.create('project.json',{'schema':'project.v1','project_id':project_id,'name':spec['name'],'Version-Timestamp':timestamp})
         state={'objective':spec['objective'],'constraints':spec['constraints'],'decisions':[], 'completed':[],
                'checks':[],'blockers':['Existing context and project-specific quality commands need review.'],
-               'next_action':'Review context/INDEX.md and define the first milestone.', 'external_actions':[],
-               'sources':['PROJECT.md','context/INDEX.md','QUALITY.md']}
+               'next_action':'Review context/index.md and define the first milestone.', 'external_actions':[],
+               'sources':['PROJECT.md','context/index.md','QUALITY.md']}
         initial=make_checkpoint(target_store,state,1,None)
         initial['Version-Timestamp']=timestamp
         initial['sha256']=digest(encode({k:v for k,v in initial.items() if k!='sha256'}))

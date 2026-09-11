@@ -6,17 +6,17 @@ Keep your company/client/project folders. After installing the private plugin, c
 
 > Use the project starter to onboard this client for [project]. Analyze the relevant existing material, explain what is known and missing, select the project folder, and prepare the next milestone. Here is the repository if applicable: [URL]. Preserve existing files.
 
-Use the namespaced project-starter skill from ide-project-starter when multiple similarly named skills appear. In Claude Code its command is `/ide-project-starter:project-starter`; select the plugin's project-starter skill in Codex. Follow CLIENT-ONBOARDING.md for the conversational wizard and source/privacy boundaries.
+Use the namespaced project-starter skill from ide-project-starter when multiple similarly named skills appear. In Claude Code its command is `/ide-project-starter:project-starter`; select the plugin's project-starter skill in Codex. Follow client-onboarding.md for the conversational wizard and source/privacy boundaries.
 
-Before installation, explicitly point the AI to skills/project-starter/SKILL.md in this kit checkout. Repo-local discovery does not make the skill available in arbitrary client folders. PLUGIN-INSTALLATION.md records exact package and installation status.
+Before installation, explicitly point the AI to skills/project-starter/SKILL.md in this kit checkout. Repo-local discovery does not make the skill available in arbitrary client folders. plugin-installation.md records exact package and installation status.
 
 Clone this repository to obtain the kit. Use its initializer to create each new project with a new identity; copying the whole kit would also copy its memory/evaluation records. Once onboarding is complete, open the selected project for daily work or explicitly select it while staying at the client root.
 
 ## Existing project
 
-Say: "Use project-starter to adopt this existing project. Preserve its files and instructions, recover the current state, show the additions, and integrate portable memory." Follow ADOPT-EXISTING.md. An existing starter project uses resume instead of a new identity.
+Say: "Use project-starter to adopt this existing project. Preserve its files and instructions, recover the current state, show the additions, and integrate portable memory." Follow adopt-existing.md. An existing starter project uses resume instead of a new identity.
 
-For either mode, follow STORAGE-BOUNDARIES.md: original client material stays at its approved source, approved summaries and project records go in the project repository, secrets stay in a credential store, and disposable tooling stays local where possible. Snapshots are optional and need approval; explicit source coverage and access gaps are required.
+For either mode, follow storage-boundaries.md: original client material stays at its approved source, approved summaries and project records go in the project repository, secrets stay in a credential store, and disposable tooling stays local where possible. Snapshots are optional and need approval; explicit source coverage and access gaps are required.
 
 ## First setup after cloning the kit
 
@@ -32,7 +32,7 @@ This recreates the tested initialization environment using network package downl
 
 ## Manual initialization
 
-Create a dedicated target and a six-field input file. Existing context first follows INTAKE.md. For example:
+Create a dedicated target and a six-field input file. Existing context first follows intake.md. For example:
 
 ```json
 {
@@ -45,7 +45,7 @@ Create a dedicated target and a six-field input file. Existing context first fol
 }
 ```
 
-For adoption, put these six fields under brief and provide a separate state object. brief.objective and state.objective must match exactly, including whitespace and punctuation. Adopt paths --target, --input and --plan are workspace-relative; state.sources is project-relative and excludes AGENTS.md and CLAUDE.md. See ADOPT-EXISTING.md for concrete commands.
+For adoption, put these six fields under brief and provide a separate state object. brief.objective and state.objective must match exactly, including whitespace and punctuation. Adopt paths --target, --input and --plan are workspace-relative; state.sources is project-relative and excludes AGENTS.md and CLAUDE.md. See adopt-existing.md for concrete commands.
 
 Save this as `projects/brief.json` inside the kit; create `projects/my-next-project`. Use software for a website or app; business for a business initiative or research without a software deliverable.
 
@@ -62,13 +62,13 @@ For a different dedicated projects workspace, pass `--workspace /absolute/projec
 
 Open the generated folder as the working project. Use `starter-resume`, `starter-checkpoint` or `starter-review` by name. In Codex use `$` mentions; in Claude use `/` commands. The skills are local to that project; no plugin or dedicated agent is needed.
 
-The first session completes context/INDEX.md and QUALITY.md, defines the first milestone, then saves a checkpoint. Meaningful work ends with another checkpoint. Fresh sessions run resume before changing files. The agent follows these instructions; there is no background observer saving every conversation.
+The first session completes context/index.md and QUALITY.md, defines the first milestone, then saves a checkpoint. Meaningful work ends with another checkpoint. Fresh sessions run resume before changing files. The agent follows these instructions; there is no background observer saving every conversation.
 
 The initializer creates the project's records, not a website framework, deployed app or operating business. Choose domain tools after the brief and constraints are understood.
 
 GitHub backup requires an authorized commit and push of reviewed files. Checkpointing alone does not update GitHub. The kit repository backs up the kit; a future project's independent repository has its own backup status.
 
-See ../validation/READINESS-RESULTS.md for tested versus pending capabilities and SESSION-ACCEPTANCE.md for the normal-session and second-computer checks.
+See ../validation/READINESS-RESULTS.md for tested versus pending capabilities and session-acceptance.md for the normal-session and second-computer checks.
 
 ## Platform limits
 

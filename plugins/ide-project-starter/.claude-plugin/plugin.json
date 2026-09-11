@@ -3,7 +3,8 @@
     "name": "Daniel Gonell"
   },
   "description": "Set up development projects with an agent-assisted wizard, preserved files and resumable work.",
+  "license": "MIT",
   "name": "ide-project-starter",
   "skills": "./skills/",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

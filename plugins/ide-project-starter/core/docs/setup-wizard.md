@@ -10,7 +10,7 @@ You do not need to choose a programming language, fill in configuration files or
 
 ## For the agent: one conversation, minimum questions
 
-Default to this project only. Use the selected folder and existing conversation. If the user supplied the kit URL, obtain and inspect a coherent trusted checkout as described by its entry guide; do not confuse the kit with the user's application. If they selected a client folder containing multiple projects, use CLIENT-ONBOARDING.md to identify one project first. Never inventory unrelated siblings.
+Default to this project only. Use the selected folder and existing conversation. If the user supplied the kit URL, obtain and inspect a coherent trusted checkout as described by its entry guide; do not confuse the kit with the user's application. If they selected a client folder containing multiple projects, use client-onboarding.md to identify one project first. Never inventory unrelated siblings.
 
 Use inspected project instructions first. Do not ask questions the conversation or files already answer. Offer recommended defaults in ordinary language. Do not ask a nontechnical user to choose a framework, JSON schema, model ID, virtual environment location or package-manager flags just to set up project continuity.
 
@@ -36,8 +36,8 @@ Symlink roots/ancestors are refused. Known metadata symlinks require reconciliat
 
 | Inspector result | Agent action |
 | --- | --- |
-| new | Assemble the six-field brief and use QUICKSTART.md preview/apply. |
-| adopt | Read the relevant existing context and assemble ADOPT-EXISTING.md brief/state input. Use preview/apply/finish. |
+| new | Assemble the six-field brief and use quickstart.md preview/apply. |
+| adopt | Read the relevant existing context and assemble adopt-existing.md brief/state input. Use preview/apply/finish. |
 | resume | Verify helper provenance and existing records, then run the trusted resume workflow. Preserve identity. |
 | recover | Find the matching interrupted plan/receipt or existing records and follow documented recovery. Never restart with a new identity. |
 | reconcile | Explain the concrete conflict and prepare its smallest safe repair. Do not initialize over it. |
@@ -51,7 +51,7 @@ Show a short preview: "I will add project instructions and saved-work records he
 
 ## 3. Prepare prerequisites and apply
 
-Use QUICKSTART.md's existing pinned environment. Reuse a compatible toolkit environment or create a local environment in the approved tooling location when dependency setup is authorized. Network package downloads and OS-level prerequisites are real actions; inspect the dependency list and use trusted native installers. Missing administrator access is a reported prerequisite, not a reason to weaken security. Do not install every language runtime because this kit supports multiple project types.
+Use quickstart.md's existing pinned environment. Reuse a compatible toolkit environment or create a local environment in the approved tooling location when dependency setup is authorized. Network package downloads and OS-level prerequisites are real actions; inspect the dependency list and use trusted native installers. Missing administrator access is a reported prerequisite, not a reason to weaken security. Do not install every language runtime because this kit supports multiple project types.
 
 Reinspect the target immediately before applying. If its identity, mode or relevant files changed, reconcile and create a fresh preview as needed. The inspector is advisory: existing preview/apply helpers enforce their own planned source/template hashes and conflicts. It is not a replacement transaction or integrity validator. Do not bypass a helper failure by changing hashes or deleting existing files.
 

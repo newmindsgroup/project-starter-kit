@@ -21,6 +21,6 @@ python3 -B scripts/build_plugin.py --check
 6. Set config/plugin-release.json's version and real timestamp. Update Claude marketplace version, CHANGELOG, README, current project state and release notes. Rebuild after source/version changes and verify exact package parity. State compatibility, migration/withdrawal instructions and remaining limits. Source changes invalidate old staged upgrade plans.
 7. Inspect the exact staged file list and credential patterns. Keep client data out of unapproved Git scope. Commit with actual tool/computer/version attribution and push only under existing authorization. Verify remote SHA and private visibility. Test a fresh GitHub clone when recovery behavior changes.
 8. Record inbox items as released only after verifying the published commit/release. Reference actual test/review evidence. The decision command records a claim; it does not check GitHub or publish anything itself.
-9. Update the installed plugin through its native installer when authorized. Separately offer PROJECT-UPGRADES.md to existing project copies. Do not silently upgrade every client or accept new skills into their policies.
+9. Update the installed plugin through its native installer when authorized. Separately offer project-upgrades.md to existing project copies. Do not silently upgrade every client or accept new skills into their policies.
 
 No weekly schedule or background watcher is enabled by this checklist. Run it at actual milestones and when meaningful feedback justifies a change.

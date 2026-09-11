@@ -15,7 +15,7 @@ A private repo is not automatic approval to copy client material. Repo membershi
 
 ## The bridge between cloud context and portable memory
 
-Keep a source register in context/INDEX.md. For each relevant source record its provider link or source-relative location, owner/audience, date/version, read coverage, what it supports, and how to refresh it. Do not store signed access URLs or credential-bearing links. Record facts, proposals, conflicts and unknowns distinctly.
+Keep a source register in context/index.md. For each relevant source record its provider link or source-relative location, owner/audience, date/version, read coverage, what it supports, and how to refresh it. Do not store signed access URLs or credential-bearing links. Record facts, proposals, conflicts and unknowns distinctly.
 
 Put a concise approved summary in the project repo. If exact content is needed for offline work, include a specifically approved, dated and redacted text snapshot with provenance. The snapshot is a copy, not a new master. Do not duplicate raw transcripts, contacts or contracts merely to make the repo feel complete.
 

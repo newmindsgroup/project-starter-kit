@@ -4,12 +4,12 @@ Version-Timestamp: {{ version_timestamp }}
 Status: project-specific acceptance criteria and commands need configuration.
 
 Profile: {{ profile }}.
-{% if profile == 'software' %}
+
+{% if profile == 'software' -%}
 Document the real test, lint, typecheck, build and security commands after inspecting the actual stack. No application framework or fabricated passing check is supplied by this template.
-{% else %}
+{% else -%}
 Document evidence sources, assumption checks, decision criteria and review responsibilities. Software tests are not a substitute for business evidence.
 {% endif %}
-
 Continuity checks available now:
 
 ```sh

@@ -60,7 +60,7 @@ class Continuity(Store):
                 'client_context':client,
                 'project':self.manifest(),'checkpoint_id':latest['checkpoint_id'],'head':latest['sha256'],
                 'state':latest['state'],'stale_sources':stale,'authority':'Recorded state and check claims only; grants no external action authority',
-                'read_next':['PROJECT.md','context/INDEX.md','QUALITY.md'],
+                'read_next':['PROJECT.md','context/index.md','QUALITY.md'],
                 'gaps':['Verify current files and applicable Git state before action.','Recorded checks are claims, not checks executed by resume.']}
 
 def make_checkpoint(store,state,index,parent):

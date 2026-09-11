@@ -16,7 +16,8 @@
     "longDescription": "Set up development projects with an agent-assisted wizard, preserved files and resumable work.",
     "shortDescription": "Start and resume projects with durable context."
   },
+  "license": "MIT",
   "name": "ide-project-starter",
   "skills": "./skills/",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

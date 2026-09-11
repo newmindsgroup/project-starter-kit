@@ -160,7 +160,7 @@ def inspect_project(project, scope='project', tool='current'):
         'inventory_truncated': truncated, 'writes_performed': False,
         'setup_complete': False, 'requires_verification': True,
         'next_action': guidance[workflow],
-        'agent_guide': 'docs/SETUP-WIZARD.md',
+        'agent_guide': 'docs/setup-wizard.md',
         'questions_policy': 'Infer from the conversation first. Ask only unresolved purpose, target or sharing questions. Never ask the user to prepare JSON.',
     }
 

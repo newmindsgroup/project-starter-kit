@@ -106,7 +106,7 @@ python3 -B "$WORKSPACE/website/.starter/project_learning.py" --root "$WORKSPACE/
 
 Apply alone is not completed adoption. Finish verifies the exact integration, then writes checkpoint 1 and its installation receipt. Review the recovered state and run the application's real checks separately.
 
-[Full adoption contract](../plugins/ide-project-starter/core/docs/ADOPT-EXISTING.md)
+[Full adoption contract](../plugins/ide-project-starter/core/docs/adopt-existing.md)
 
 ## Save and resume a checkpoint
 
@@ -132,4 +132,4 @@ Keep the exact original plan. Repeating apply with that same unchanged plan can 
 
 For adoption, perform any missing compatible entry appends and run finish. A retained adoption-pending marker can remain after completion as provenance. Resume still verifies current saved state.
 
-[Recovery limits](../plugins/ide-project-starter/core/docs/ADOPT-EXISTING.md) · [Troubleshooting](TROUBLESHOOTING.md)
+[Recovery limits](../plugins/ide-project-starter/core/docs/adopt-existing.md) · [Troubleshooting](troubleshooting.md)

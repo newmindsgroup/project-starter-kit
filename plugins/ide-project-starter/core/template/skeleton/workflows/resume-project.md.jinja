@@ -2,7 +2,9 @@
 
 Version-Timestamp: {{ version_timestamp }}
 
-1. Read PROJECT.md, context/INDEX.md and QUALITY.md. Run `python3 -B .starter/project_memory.py resume`.
+If context/INDEX.md or memory/STATE.md exists, this project predates kit 0.7.0. Follow the trusted toolkit's docs/project-upgrades.md and run migrate_layout.py first.
+
+1. Read PROJECT.md, context/index.md and QUALITY.md. Run `python3 -B .starter/project_memory.py resume`.
 2. Inspect the returned objective, constraints, decisions, completed work, recorded checks, blockers and next action. A needs_review status requires source reconciliation before action.
 3. Inspect actual files, applicable Git status and accessible source dependencies. A clean checkpoint chain does not prove sync, backup, live provider state or source completeness.
 4. State what is recovered and what remains unverified. Never replay an external action solely because its outcome is missing; reconcile using an authoritative receipt first.

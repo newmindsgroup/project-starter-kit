@@ -8,4 +8,4 @@ The kit uses a Python environment with Copier 9.18.2 and its pinned dependencies
 
 Research informed the project, including public material from Copier, Basic Memory, OpenSpec, Spec Kit, ECC and claude-mem. Mentioning them does not mean their memory engines or agents are installed by this kit. Their authors retain credit for their work.
 
-This notice does not replace third-party license requirements or grant a license for the original kit. See LICENSING.md.
+This notice does not replace third-party license requirements. The original kit is released under the MIT License; see LICENSE and LICENSING.md.

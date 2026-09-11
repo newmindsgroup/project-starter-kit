@@ -38,3 +38,16 @@ Rollback is a reviewed manual operation. No broad delete/reset or automatic dest
 On another computer, clone approved project records, recreate local tools, authenticate to necessary sources and run resume. The kit does not copy credentials, globally install plugins, or guarantee provider access. Plans depend on the exact toolkit release; if toolkit bytes change, preserve the old stage and generate a fresh reviewed plan.
 
 Installation and upgrade receipts are local recovery metadata, not authenticated provenance. The original installation receipt has no seal; upgrade receipts have unkeyed hashes. Deliberate edits with recomputed hashes and deletion of the last receipt cannot be reliably detected without a separate trusted backup. Compare approved Git history when metadata is suspect. Do not rebaseline a customization to bypass review.
+
+## From 0.6 to 0.7: lowercase record names
+
+Version 0.7.0 renamed context/INDEX.md, context/STORAGE.md, memory/INDEX.md, memory/STATE.md and the profile WORK.md file to lowercase. A project created earlier migrates once, before its next upgrade. The upgrade helper refuses to stage while old names remain.
+
+```sh
+"$KIT/experiments/.venv/bin/python" -B "$KIT/scripts/migrate_layout.py" --workspace "$WORKSPACE" preview --target website --stage layout-migration
+# Before apply: review each file under layout-migration/candidate/ against layout-migration/original/.
+"$KIT/experiments/.venv/bin/python" -B "$KIT/scripts/migrate_layout.py" --workspace "$WORKSPACE" apply --stage layout-migration
+"$KIT/experiments/.venv/bin/python" -B "$KIT/scripts/migrate_layout.py" --workspace "$WORKSPACE" finish --stage layout-migration
+```
+
+Preview writes a sealed plan, exact candidate instruction files and their originals outside the project. Apply checks everything before changing anything, renames records through a temporary name so a case-only rename also works on case-insensitive filesystems, and replaces an instruction file with its reviewed candidate only while the file still matches its staged original. Record content never changes. Inside an adoption block, candidates use the new names and move headings one level down so the host file keeps a single title. Finish verifies every rename and candidate, appends a checkpoint with the same state and renamed sources, and records a receipt under .starter/migration-receipts/. Then run the ordinary upgrade to receive the 0.7 helpers, workflows and skills.

@@ -3,11 +3,11 @@
 Version-Timestamp: 2026-09-09T17:55:08.294286-04:00
 Status: supervised adoption. Existing application layout remains intact.
 
-Invoke project-starter and say "Adopt this existing project." The same four skills serve both starting modes. Read STORAGE-BOUNDARIES.md first. Identify the actual project/repository root, source material, storage audiences, existing instructions, uncommitted work and any existing memory system. No Git operation, provider action or dependency execution is an intake side effect.
+Invoke project-starter and say "Adopt this existing project." The same four skills serve both starting modes. Read storage-boundaries.md first. Identify the actual project/repository root, source material, storage audiences, existing instructions, uncommitted work and any existing memory system. No Git operation, provider action or dependency execution is an intake side effect.
 
 ## Review current understanding
 
-Prepare a reviewed JSON input with two objects: brief (the six QUICKSTART fields) and state (objective, constraints, decisions, completed, checks, blockers, next_action, external_actions and sources). Use actual current work, not invented historical checkpoints. Check claims are labeled as historical unless rerun. sources contains explicitly selected, existing project-relative UTF-8 documents, not secrets or instruction files being appended. Inaccessible materials remain gaps. brief.objective and state.objective must match exactly, including whitespace, capitalization and punctuation. Copy the same string into both fields. This is required in addition to the six-field brief described in QUICKSTART.md.
+Prepare a reviewed JSON input with two objects: brief (the six QUICKSTART fields) and state (objective, constraints, decisions, completed, checks, blockers, next_action, external_actions and sources). Use actual current work, not invented historical checkpoints. Check claims are labeled as historical unless rerun. sources contains explicitly selected, existing project-relative UTF-8 documents, not secrets or instruction files being appended. Inaccessible materials remain gaps. brief.objective and state.objective must match exactly, including whitespace, capitalization and punctuation. Copy the same string into both fields. This is required in addition to the six-field brief described in quickstart.md.
 
 ## Preview, add, integrate, verify
 
@@ -25,7 +25,7 @@ WORKSPACE="/absolute/path/to/client-folder"
 
 Preview writes only the plan and temporary rendering scratch. The plan records SHA-256 hashes of raw UTF-8 bytes, original preserved text, exact additions and exact append blocks. Review it before apply. The plan can contain confidential current context and instructions. Preserve it as the recovery record in an approved destination.
 
-The helper preserves existing README.md, PROJECT.md, QUALITY.md, context/INDEX.md and profile work documents. It creates missing standard files. Existing AGENTS.md and CLAUDE.md receive proposed append blocks, not automatic replacement. Review all existing rules and block content for compatibility. Append the returned UTF-8 block bytes exactly once, retaining every original byte, including BOM, CRLF and missing final newline. This append is a deliberate agent-performed edit within the authorized adoption, not a separate request for blanket approval. Never change earlier instructions to force completion. If policy conflicts require a semantic merge, stop this automatic path and prepare a separately reviewed manual migration.
+The helper preserves existing README.md, PROJECT.md, QUALITY.md, context/index.md and profile work documents. It creates missing standard files. Existing AGENTS.md and CLAUDE.md receive proposed append blocks, not automatic replacement. Review all existing rules and block content for compatibility. Append the returned UTF-8 block bytes exactly once, retaining every original byte, including BOM, CRLF and missing final newline. This append is a deliberate agent-performed edit within the authorized adoption, not a separate request for blanket approval. Never change earlier instructions to force completion. If policy conflicts require a semantic merge, stop this automatic path and prepare a separately reviewed manual migration.
 
 The CLI never overwrites existing files. Existing identity/runtime, learning/checkpoint records or other owned-path collisions block preview. Use resume for an already-adopted project; a different existing memory system needs explicit migration mapping. This is not a universal converter.
 
@@ -43,11 +43,11 @@ Only one adoption/operator may change the target at a time. The create-only .sta
 
 Keep the plan until adoption is verified and backed up. If it is lost or edited, restore its exact reviewed copy. Never remove the marker or edit hashes to bypass conflict checks. Changed sources, original files or generated additions require reconciliation, not blind retries. No transaction spans agent edits, helper writes or cloud synchronization.
 
-For a reviewed rollback before ordinary project work, use the plan's created-path/hash list to identify only unchanged starter additions. Restore instruction files from their preserved original bytes only if the current file exactly equals original plus the planned block. Preserve any later edits or records. Delete no unrelated files and do not reset Git. No automatic destructive rollback command is provided. If safe integration is unsuitable, use the companion workflow in INTAKE.md with its separate discovery and source-freshness limits.
+For a reviewed rollback before ordinary project work, use the plan's created-path/hash list to identify only unchanged starter additions. Restore instruction files from their preserved original bytes only if the current file exactly equals original plus the planned block. Preserve any later edits or records. Delete no unrelated files and do not reset Git. No automatic destructive rollback command is provided. If safe integration is unsuitable, use the companion workflow in intake.md with its separate discovery and source-freshness limits.
 
 Existing .gitignore is preserved exactly, including negations. Review its coverage and the actual staged upload scope before publication; adoption does not promise that an old ignore file covers every sensitive path. Do not run a formatter on instruction files before finish. The permitted result is exactly the original bytes followed by the planned block, with no extra trailing bytes.
 
-Preview and apply expose unapplied_ignore_rules when an existing .gitignore is preserved. This is a non-binding comparison aid, not permission to append the rules. Review their interaction with existing negations and the exact staged set. A missing .gitignore is created from the template.
+Preview and apply expose unapplied_ignore_rules when an existing .gitignore is preserved, and unapplied_attribute_rules when an existing .gitattributes is preserved. Add the -text rules for starter records to an existing .gitattributes, or record why not: without them, line-ending conversion can make unchanged records look changed. This is a non-binding comparison aid, not permission to append the rules. Review their interaction with existing negations and the exact staged set. A missing .gitignore is created from the template.
 
 ## Diagnosing a failed command
 

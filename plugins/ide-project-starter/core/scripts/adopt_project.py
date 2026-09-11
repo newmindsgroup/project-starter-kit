@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Version-Timestamp: 2026-09-09T17:55:08.294286-04:00
+# Version-Timestamp: 2026-09-11 14:52:59 AST
 """Adopt an existing project with create-only files and reviewed instruction appends."""
 import argparse
 import json
@@ -10,7 +10,7 @@ from project_learning import Store, Invalid, require, fields, digest, encode, st
 from project_memory import state_check, make_checkpoint
 from start_project import destination, workspace_root, render, spec_check, classify
 
-PRESERVE={'README.md','PROJECT.md','QUALITY.md','context/INDEX.md','business/WORK.md','software/WORK.md','.gitignore'}
+PRESERVE={'README.md','PROJECT.md','QUALITY.md','context/index.md','business/work.md','software/work.md','.gitignore','.gitattributes'}
 ENTRY={'AGENTS.md','CLAUDE.md'}
 PENDING='.starter/adoption-pending.json'
 RECEIPT='.starter/installation.json'
@@ -43,16 +43,23 @@ def selected_sources(dst,state):
 def materialize(store,plan):
     files=render(plan['brief'],plan['project_id'],plan['Version-Timestamp'],scratch=store.path('.starter-work/render'))
     del files['memory/checkpoints/0001.json']
+    # Editor settings are a new-project default; adoption never imposes them on an existing application.
+    files.pop('.editorconfig',None)
     append={}
     ignore_rules=files[".gitignore"] if ".gitignore" in plan["preserved"] else None
+    attribute_rules=files[".gitattributes"] if ".gitattributes" in plan["preserved"] else None
     for name,content in plan['preserved'].items():
         require(name in PRESERVE|ENTRY,'Unsupported preserved path')
         if name not in files:continue
         if name in ENTRY:
-            block='\n\n<!-- STARTER ADOPTION '+plan['project_id']+' -->\n'+files[name]+'\n<!-- END STARTER ADOPTION -->\n'
+            # Exactly one blank line before the block, and headings one level down so
+            # the host file keeps a single top-level title.
+            body=''.join('#'+line if 1<=len(line)-len(line.lstrip('#'))<=5 and line.lstrip('#').startswith(' ') else line for line in files[name].splitlines(True))
+            sep='' if not content or content.endswith('\n\n') else ('\n' if content.endswith('\n') else '\n\n')
+            block=sep+'<!-- STARTER ADOPTION '+plan['project_id']+' -->\n'+body+'\n<!-- END STARTER ADOPTION -->\n'
             append[name]=block
         del files[name]
-    return files,append,ignore_rules
+    return files,append,ignore_rules,attribute_rules
 
 def verify_plan(store,relative):
     plan=argument_json(store,relative,'--plan')
@@ -63,9 +70,9 @@ def verify_plan(store,relative):
     spec_check(plan['brief']);state_check(plan['state'])
     dst=Store(destination(store,plan['target']))
     require(not store.path(relative).is_relative_to(dst.root),'Plan must be outside target')
-    files,append,ignore_rules=materialize(store,plan)
+    files,append,ignore_rules,attribute_rules=materialize(store,plan)
     require({k:digest(v.encode()) for k,v in files.items()}==plan['hashes'] and append==plan['append'],'Toolkit changed since preview; preserve partial output and reconcile')
-    return plan,dst,files,ignore_rules
+    return plan,dst,files,ignore_rules,attribute_rules
 
 def check_originals(dst,plan,finished=False):
     for name,original in plan['preserved'].items():
@@ -94,14 +101,14 @@ def preview(store,args):
     plan={'schema':'adoption-plan.v1','workspace':str(store.root),'Version-Timestamp':stamp(),'project_id':str(uuid.uuid4()),'brief':payload['brief'],'state':payload['state'],'target':args.target,'preserved':preserved,'sources':selected_sources(dst,payload['state'])}
     # Instruction files change during the explicit merge, so cannot be baseline source inputs.
     require(not any(s['path'] in ENTRY for s in plan['sources']),'Use project/context documents as adoption sources, not instruction files being merged')
-    files,append,ignore_rules=materialize(store,plan);result=classify(dst.root,files)
+    files,append,ignore_rules,attribute_rules=materialize(store,plan);result=classify(dst.root,files)
     require(not result['conflicts'] and not result['same'],'Owned path collision; preserve and prepare a manual migration')
     plan['hashes']={k:digest(v.encode()) for k,v in files.items()};plan['append']=append
     plan['plan_id']=digest(encode(plan));store.create(args.plan,plan)
-    return {'status':'previewed','plan':args.plan,'plan_id':plan['plan_id'],'create':sorted(files),'preserve':sorted(preserved),'review_and_append':append,'unapplied_ignore_rules':ignore_rules,'warning':'Plan contains reviewed project context and original instructions; keep it in an approved private workspace.'}
+    return {'status':'previewed','plan':args.plan,'plan_id':plan['plan_id'],'create':sorted(files),'preserve':sorted(preserved),'review_and_append':append,'unapplied_ignore_rules':ignore_rules,'unapplied_attribute_rules':attribute_rules,'warning':'Plan contains reviewed project context and original instructions; keep it in an approved private workspace.'}
 
 def apply(store,args):
-    plan,dst,files,ignore_rules=verify_plan(store,args.plan)
+    plan,dst,files,ignore_rules,attribute_rules=verify_plan(store,args.plan)
     if dst.path(RECEIPT).exists():return finish(store,args)
     if dst.path(PENDING).exists():require(dst.json(PENDING)['plan_id']==plan['plan_id'],'Different adoption pending')
     check_originals(dst,plan)
@@ -110,10 +117,10 @@ def apply(store,args):
     if not dst.path(PENDING).exists():dst.create(PENDING,{'schema':'adoption-pending.v1','Version-Timestamp':stamp(),'plan_id':plan['plan_id']})
     for name in sorted(files):
         if name not in result['same']:dst.create_bytes(name,files[name].encode())
-    return {'status':'needs_entry_review','plan_id':plan['plan_id'],'created':result['create'],'append':plan['append'],'unapplied_ignore_rules':ignore_rules,'next_action':'Review and append exact blocks preserving original bytes, then run finish. No checkpoint exists yet.'}
+    return {'status':'needs_entry_review','plan_id':plan['plan_id'],'created':result['create'],'append':plan['append'],'unapplied_ignore_rules':ignore_rules,'unapplied_attribute_rules':attribute_rules,'next_action':'Review and append exact blocks preserving original bytes, then run finish. No checkpoint exists yet.'}
 
 def finish(store,args):
-    plan,dst,files,ignore_rules=verify_plan(store,args.plan)
+    plan,dst,files,ignore_rules,attribute_rules=verify_plan(store,args.plan)
     require(dst.path(PENDING).exists(),'Run apply first; no adoption is pending')
     require(dst.json(PENDING)['plan_id']==plan['plan_id'],'Different adoption pending')
     if dst.path(RECEIPT).exists():
@@ -122,7 +129,7 @@ def finish(store,args):
     check_originals(dst,plan,finished=True)
     actual=classify(dst.root,files)
     require(not actual['create'] and not actual['conflicts'],'Generated additions changed or missing; inspect and reapply the same plan before finishing')
-    state=dict(plan['state']);state['sources']=list(dict.fromkeys(state['sources']+['PROJECT.md','context/INDEX.md','QUALITY.md']))
+    state=dict(plan['state']);state['sources']=list(dict.fromkeys(state['sources']+['PROJECT.md','context/index.md','QUALITY.md']))
     record=make_checkpoint(dst,state,1,None)
     record['Version-Timestamp']=plan['Version-Timestamp']
     record['sha256']=digest(encode({k:v for k,v in record.items() if k!='sha256'}))

@@ -6,7 +6,7 @@ Version-Timestamp: 2026-09-10 18:27:14 AST
 | --- | --- |
 | Repo URL gives 404 | Confirm the exact public URL. Private application URLs require separate authentication. Never paste tokens into chat. |
 | Skill is missing | Start a fresh session; check the installed marketplace/version. For repo-only use, ask the agent to read the package's skills/project-starter/SKILL.md directly. |
-| Python or Copier missing | Follow INSTALL.md and COMMANDS.md. Use the pinned environment; do not install every framework runtime. |
+| Python or Copier missing | Follow install.md and commands.md. Use the pinned environment; do not install every framework runtime. |
 | Absolute --input/--plan/--target rejected | Keep --workspace absolute. Supply those three flags relative to that workspace, for example website or adoption-input.json. |
 | Brief and state objectives differ | Copy the exact objective string into both fields, including punctuation and whitespace. |
 | Input file missing or malformed | Check its filename relative to --workspace and validate the JSON. Default diagnostics name the relevant argument. |

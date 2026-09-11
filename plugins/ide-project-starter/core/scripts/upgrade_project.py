@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Version-Timestamp: 2026-09-08T17:48:04.992939-04:00
+# Version-Timestamp: 2026-09-11 14:52:59 AST
 """Stage and verify reviewed project-copy upgrades. Never replaces project files."""
 import argparse
 import difflib
@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
-from project_learning import Store,Invalid,require,fields,digest,encode,stamp
+from project_learning import Store,Invalid,require,fields,digest,encode,stamp,LEGACY_LAYOUT,exact_exists
 from start_project import BASE,destination,workspace_root
 from project_feedback import sealed,checked
 
@@ -17,7 +17,7 @@ def candidates():
     kit=Store(BASE);release=kit.json('config/plugin-release.json');result={}
     mapping={'.starter/'+n:'scripts/'+n for n in ['project_learning.py','project_memory.py','project_client.py','project_feedback.py']}
     mapping['config/learning-skills.json']='config/learning-skills.json'
-    mapping['context/STORAGE.md']='template/skeleton/context/STORAGE.md.jinja'
+    mapping['context/storage.md']='template/skeleton/context/storage.md.jinja'
     for name in ['start-project','resume-project','checkpoint-project','review-project']:mapping['workflows/'+name+'.md']='template/skeleton/workflows/'+name+'.md.jinja'
     for tool in ['.agents','.claude']:
         for name in ['starter-resume','starter-checkpoint','starter-review']:mapping[f'{tool}/skills/{name}/SKILL.md']='skills/'+name+'/SKILL.md'
@@ -34,6 +34,9 @@ def baseline(dst):
         require(p.name==f'{index:04d}.json','Upgrade receipt sequence mismatch');r=checked(dst.json(dst.relative(p)))
         require(r['parent']==parent and r['project_id']==initial['project_id'],'Upgrade receipt chain mismatch')
         result.update(r['hashes']);parent=r['sha256'];records.append(r)
+    # 0.7.0 renamed the managed storage note. Carry its known hash to the new name.
+    for old,new in LEGACY_LAYOUT.items():
+        if new not in result and old in result:result[new]=result[old]
     return result,records
 
 def protected(dst):
@@ -45,12 +48,14 @@ def protected(dst):
         if root.exists():
             for p in root.rglob('*'):
                 require(not p.is_symlink(),'Symlink protected record refused')
-                if p.is_file() and dst.relative(p)!='context/STORAGE.md':names.append(dst.relative(p))
+                if p.is_file() and dst.relative(p)!='context/storage.md':names.append(dst.relative(p))
     require(len(names)<=2000,'Protected record inventory too large; use a reviewed migration')
     return {n:digest(dst.read(n)) for n in sorted(names)}
 
 def preview(store,target,stage):
     dst=Store(destination(store,target));stage_path=store.path(stage)
+    legacy=[old for old in LEGACY_LAYOUT if exact_exists(dst.root,old)]
+    require(not legacy,'Old record names present ('+', '.join(legacy)+'); run migrate_layout.py preview, apply and finish first')
     require(not stage_path.is_relative_to(dst.root) and not dst.root.is_relative_to(stage_path),'Upgrade staging must be outside the project')
     require(not stage_path.exists(),'Upgrade staging already exists; preserve or choose a new path')
     version,files=candidates();known,records=baseline(dst);before={};conflicts=[]

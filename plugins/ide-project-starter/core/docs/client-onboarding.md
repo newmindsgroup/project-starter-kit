@@ -33,7 +33,7 @@ python3 -B TOOLKIT/scripts/project_client.py --root CLIENT init --name "Client n
 
 Use internal or shared only from confirmed user information. This writes CLIENT.json once and preserves its random UUID. It does not verify provider ACLs. Existing name/classification differences require review. Copying/restoring a client preserves its logical identity; a different client must get a newly initialized root. No global duplicate-identity registry exists, and copied UUIDs are not authentication.
 
-Choose an existing project by its project.json identity, or create the requested project folder. Do not initialize Git at the client root. Preserve nested repositories, remotes and uncommitted work. Existing collisions follow INTAKE.md; use ADOPT-EXISTING.md for reviewed additive integration and exact instruction appends. General semantic merging is not automated.
+Choose an existing project by its project.json identity, or create the requested project folder. Do not initialize Git at the client root. Preserve nested repositories, remotes and uncommitted work. Existing collisions follow intake.md; use adopt-existing.md for reviewed additive integration and exact instruction appends. General semantic merging is not automated.
 
 ## Initialization environment and preview
 
@@ -79,4 +79,4 @@ Initializers and client helpers make no Git/network calls. A future project's re
 
 On every resume and refresh, intervening client, project and Git boundaries are checked again. A newly inserted boundary makes the link unavailable until explicitly reconciled. A missing client helper during a partial upgrade makes resume require review. Unsafe, empty or invalid changed text remains flagged and cannot be accepted simply by refreshing its hash; reconcile the source first.
 
-Resolve Start new, Adopt existing or Resume before applying a template. Record storage destinations and audiences per STORAGE-BOUNDARIES.md. A cloud client folder is the discovery context; the chosen development/memory workspace may be elsewhere when permissions or sync make that preferable. Sources outside the client ancestor use references and approved snapshots, not implicit client-link subscriptions.
+Resolve Start new, Adopt existing or Resume before applying a template. Record storage destinations and audiences per storage-boundaries.md. A cloud client folder is the discovery context; the chosen development/memory workspace may be elsewhere when permissions or sync make that preferable. Sources outside the client ancestor use references and approved snapshots, not implicit client-link subscriptions.

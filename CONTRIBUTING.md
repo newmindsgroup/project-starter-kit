@@ -8,4 +8,4 @@ This repository is a generated distribution. The maintainer reviews feedback and
 
 A useful report says what you expected, what happened, how to reproduce it and which existing files must remain untouched. Improvements to an existing skill are preferred over duplicate skills when they solve the same problem.
 
-Daniel Gonell maintains the kit through New Minds Group. The licensing status is documented in LICENSING.md. Do not assume publication grants rights that have not been stated.
+Daniel Gonell maintains the kit through New Minds Group. The kit is released under the MIT License; see LICENSE and LICENSING.md. Contributions are accepted under the same license.

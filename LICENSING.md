@@ -1,7 +1,9 @@
-# Licensing status
+# Licensing
 
-Version-Timestamp: 2026-09-10 18:27:14 AST
+Version-Timestamp: 2026-09-11 15:42:47 AST
 
-An open-source license for the original kit has not yet been selected by its author, Daniel Gonell. This release is publicly readable, but it does not grant a general open-source reuse license. Contact the maintainer for reuse terms.
+The original kit is released under the MIT License by its author, Daniel Gonell. See LICENSE.
 
-Third-party dependencies keep their own licenses. No copied upstream research snapshots are included in this distribution. A later license decision must be published explicitly; public visibility alone does not make that decision.
+Files the kit places in your project, including the .starter helpers, workflows, project-local skills and the records it generates, may be used, modified and distributed as part of that project without reproducing the kit's copyright notice. This is an additional permission from the author, so a project created or adopted with the kit does not have to carry the kit's license.
+
+Third-party dependencies keep their own licenses. No copied upstream research snapshots are included in this distribution.

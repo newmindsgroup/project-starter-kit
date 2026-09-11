@@ -2,7 +2,7 @@
 
 **Give your next session a place to pick up.**
 
-Created by **Daniel Gonell** · v0.6.0 · Supervised pilot
+Created by **Daniel Gonell** · v0.7.0 · Supervised pilot
 
 Version-Timestamp: 2026-09-10 18:27:14 AST
 
@@ -10,7 +10,7 @@ A shared foundation for Codex and Claude Code projects. Bring an idea, an existi
 
 **Two ways in: paste this repository link, or install the plugin. Both use the same four skills and helpers.**
 
-[Start now](#start-in-five-steps) · [AI instructions](START-HERE.md) · [Install](docs/INSTALL.md) · [Commands](docs/COMMANDS.md) · [Troubleshooting](docs/TROUBLESHOOTING.md) · [Release verification](docs/RELEASES.md)
+[Start now](#start-in-five-steps) · [AI instructions](START-HERE.md) · [Install](docs/install.md) · [Commands](docs/commands.md) · [Troubleshooting](docs/troubleshooting.md) · [Release verification](docs/releases.md)
 
 > **For an AI receiving this repo URL:** read [START-HERE.md](START-HERE.md), then the canonical [project-starter skill](plugins/ide-project-starter/skills/project-starter/SKILL.md). Use this checkout as tooling. Preserve the user's application repository and history.
 
@@ -46,11 +46,11 @@ Public kit access does not provide access to your private application, Drive fil
 | An interrupted setup | Recovery uses the existing plan and records. It does not invent a new identity to bypass the interruption. |
 | A different memory system or conflicting rules | The agent prepares a migration or companion-records plan before changing anything. |
 
-The v0.6.0 wizard includes a **read-only inspector** that suggests a route. It does not apply a template, install tools or prove that a framework works. The agent reviews its findings and uses the existing preview/apply helpers.
+The wizard includes a **read-only inspector** that suggests a route. It does not apply a template, install tools or prove that a framework works. The agent reviews its findings and uses the existing preview/apply helpers.
 
 The foundation works with software and business/research profiles. It does not choose your product strategy or install every language runtime. Website frameworks, mobile tooling, databases and business execution belong to the project itself.
 
-[Setup wizard details](plugins/ide-project-starter/core/docs/SETUP-WIZARD.md) · [Existing-project adoption](plugins/ide-project-starter/core/docs/ADOPT-EXISTING.md)
+[Setup wizard details](plugins/ide-project-starter/core/docs/setup-wizard.md) · [Existing-project adoption](plugins/ide-project-starter/core/docs/adopt-existing.md)
 
 ## What is included?
 
@@ -115,7 +115,7 @@ The agent reads approved material, distinguishes facts from proposals and record
 
 A private application repo can still have the wrong audience for internal notes. Use an approved private records location when necessary. Git ignore rules do not stop cloud-drive synchronization.
 
-[Storage boundaries](plugins/ide-project-starter/core/docs/STORAGE-BOUNDARIES.md) · [Context intake](plugins/ide-project-starter/core/docs/INTAKE.md)
+[Storage boundaries](plugins/ide-project-starter/core/docs/storage-boundaries.md) · [Context intake](plugins/ide-project-starter/core/docs/intake.md)
 
 ## What the memory actually saves
 
@@ -148,7 +148,7 @@ Both routes require a local agent with file and command tools. A web chat that c
 
 **Prerequisites:** Python 3.10 or newer, the pinned Copier environment for initialization/adoption, and a supported filesystem. Existing project resume uses Python without Copier. Current initialization is a macOS/POSIX pilot with hard-link support; Windows initialization is unsupported and other systems need testing.
 
-[Exact installation steps](docs/INSTALL.md) · [Technical recipes and input examples](docs/COMMANDS.md)
+[Exact installation steps](docs/install.md) · [Technical recipes and input examples](docs/commands.md)
 
 ## Team use, improvements and drift
 
@@ -160,7 +160,7 @@ A plugin update changes the shared workflows available for future use. It does *
 
 The learning workflow can record observations and propose a reusable skill. It does not retrain the AI, approve proposals, activate skills or upload private feedback automatically.
 
-[Release and verification process](docs/RELEASES.md) · [Contributing](CONTRIBUTING.md) · [Project upgrades](plugins/ide-project-starter/core/docs/PROJECT-UPGRADES.md)
+[Release and verification process](docs/releases.md) · [Contributing](CONTRIBUTING.md) · [Project upgrades](plugins/ide-project-starter/core/docs/project-upgrades.md)
 
 ## Readiness, limits and support
 
@@ -168,10 +168,10 @@ This is a **supervised pilot**, suitable for a careful first project with review
 
 The kit is not a complete sensitive-data classifier, hostile-filesystem security boundary, distributed lock, unattended installer, full memory-system converter or application test runner. Do not run competing adoption writers against the same target. Preserve partial work and its plan when a command fails.
 
-[Common problems and recovery](docs/TROUBLESHOOTING.md) · [Report a sanitized issue](https://github.com/newmindsgroup/project-starter-kit/issues)
+[Common problems and recovery](docs/troubleshooting.md) · [Report a sanitized issue](https://github.com/newmindsgroup/project-starter-kit/issues)
 
 ## Author and licensing
 
 Created by **Daniel Gonell**, maintained through **New Minds Group**, with AI-assisted development. Upstream tools retain their own authorship and terms. See [AUTHORS.md](AUTHORS.md) and [NOTICE.md](NOTICE.md).
 
-Licensing is currently undecided. Public visibility does not grant an open-source reuse license. See [LICENSING.md](LICENSING.md) for the current status.
+Released under the [MIT License](LICENSE). Files the kit places in your project are yours to use without carrying the kit's notice; see [LICENSING.md](LICENSING.md).

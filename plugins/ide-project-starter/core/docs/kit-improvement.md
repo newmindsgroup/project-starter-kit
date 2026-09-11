@@ -47,7 +47,7 @@ python3 -B scripts/project_feedback.py --root . decide --id INBOX_ID --input dec
 
 Lifecycle: open → triaged → implemented → released. Open/triaged/implemented may be rejected; implemented can return to triaged. Decisions are immutable, sequential and expected-head protected. Implemented/released require evidence; released requires a release reference. Evidence hashes record supporting files, not proof that their claims are true. The agent must actually execute checks and verify publication before recording released. These commands never commit, push, create issues or send messages.
 
-Use RELEASE-CHECKLIST.md. Update canonical source, regenerate the plugin, add regression cases and document migrations. All projects do not automatically receive a release. Use PROJECT-UPGRADES.md for project copies and the native installer for the installed plugin.
+Use release-checklist.md. Update canonical source, regenerate the plugin, add regression cases and document migrations. All projects do not automatically receive a release. Use project-upgrades.md for project copies and the native installer for the installed plugin.
 
 ## Measure usefulness
 

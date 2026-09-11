@@ -1,7 +1,7 @@
 # Start, resume and checkpoint
 
 Version-Timestamp: 2026-09-08T15:03:37.044204-04:00
-Status: v0.2 supervised pilot with business/software profiles and a private GitHub backup. No global installation. See QUICKSTART.md for the shortest path.
+Status: v0.2 supervised pilot with business/software profiles and a private GitHub backup. No global installation. See quickstart.md for the shortest path.
 
 ## What is ready
 
@@ -21,7 +21,7 @@ experiments/.venv/bin/python -B scripts/start_project.py apply --plan examples/m
 
 The preview writes its plan and disposable rendering files under .starter-work/render in the selected workspace, never project target files. Review its create, same and conflicts lists. Apply is the explicit local write step. The plan fixes the brief, identity, version timestamp and output hashes. Template changes after preview require a new plan. Plans are integrity-checked records, not signed authorization tokens.
 
-A conflicting existing README, PROJECT, entry file or other template-owned path stops the entire preflight. Preserve the original and use a new destination or resolve the adoption separately. There is no force overwrite or automatic merge flag. Follow INTAKE.md for companion-folder adoption or a reviewed manual integration. Unrelated existing files stay in place. An unchanged repeat of a completed plan preserves edits and returns already_initialized, which is not a health assertion.
+A conflicting existing README, PROJECT, entry file or other template-owned path stops the entire preflight. Preserve the original and use a new destination or resolve the adoption separately. There is no force overwrite or automatic merge flag. Follow intake.md for companion-folder adoption or a reviewed manual integration. Unrelated existing files stay in place. An unchanged repeat of a completed plan preserves edits and returns already_initialized, which is not a health assertion.
 
 No arbitrary repository URL is fetched. Creating or publishing a remote repository remains a separately scoped step. Existing Git repositories can receive additive files when no owned path conflicts, but this tool does not inspect Git status; the start workflow requires that inspection. No global onboarding overlay is applied to this Drive-backed folder.
 
@@ -38,7 +38,7 @@ Python 3.10 or newer is needed by the portable helpers. They use only the standa
 
 Resume returns the latest objective, constraints, decisions, completed work, recorded checks, blockers, next action, external action notes and head digest. Source changes produce needs_review. Even ready_for_context_review requires inspecting actual files and applicable Git status. A valid chain proves neither completed work nor current external state.
 
-The stable memory/STATE.md points to the checkpoint reader. It is not a second writable state summary. Both AGENTS.md and CLAUDE.md point to the same procedure. Their contents have been inspected, but automatic loading in new Codex/Claude sessions remains untested.
+The stable memory/state.md points to the checkpoint reader. It is not a second writable state summary. Both AGENTS.md and CLAUDE.md point to the same procedure. Their contents have been inspected, but automatic loading in new Codex/Claude sessions remains untested.
 
 ## Save a checkpoint
 

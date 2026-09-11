@@ -12,7 +12,7 @@ For a manual checkout, choose a tooling folder outside the application:
 git clone https://github.com/newmindsgroup/project-starter-kit.git
 ```
 
-The checkout contains a release manifest. Follow [RELEASES.md](RELEASES.md) to verify it, then follow [COMMANDS.md](COMMANDS.md). Cloning does not install Python, authenticate to your client sources or initialize your application.
+The checkout contains a release manifest. Follow [releases.md](releases.md) to verify it, then follow [commands.md](commands.md). Cloning does not install Python, authenticate to your client sources or initialize your application.
 
 ## Option B: native plugin installation
 
