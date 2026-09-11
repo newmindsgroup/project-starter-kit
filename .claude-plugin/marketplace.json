@@ -11,7 +11,7 @@
       "name": "ide-project-starter",
       "source": "./plugins/ide-project-starter",
       "description": "Set up, adopt and resume projects with portable records.",
-      "version": "0.7.0"
+      "version": "0.7.1"
     }
   ]
 }

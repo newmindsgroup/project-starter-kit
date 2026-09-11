@@ -19,7 +19,7 @@ Frozen evidence is never renamed, because its paths are part of what it records:
 
 ## Renaming safely
 
-A case-only rename, such as INDEX.md to index.md, is not a no-op on macOS and Windows. Their default filesystems are case-insensitive, so a check for index.md succeeds while only INDEX.md is on disk, and some tools then skip the rename. Rename through a temporary name or with `git mv`, and confirm the exact name from a directory listing rather than an existence check. `scripts/migrate_layout.py` does this for projects created before 0.7.0.
+A case-only rename, such as INDEX.md to index.md, is not a no-op on macOS and Windows. Their default filesystems are case-insensitive, so a check for index.md succeeds while only INDEX.md is on disk, and some tools then skip the rename. Rename through a temporary name or with `git mv`, and confirm the exact name from a directory listing rather than an existence check. `scripts/migrate_layout.py` does this for projects created before 0.7.0. In a Git repository on those systems, also record the rename explicitly with `git rm --cached OLD` and `git add NEW`, because `git add -A` does not record a change of case alone.
 
 ## Line endings
 

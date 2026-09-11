@@ -5,8 +5,8 @@ description: Set up, adopt or resume development projects with a low-detail wiza
 
 # Project setup and scoped client onboarding
 
-Version-Timestamp: 2026-09-11 15:58:29 AST
-Kit-Version: 0.7.0-pilot
+Version-Timestamp: 2026-09-11 16:14:13 AST
+Kit-Version: 0.7.1-pilot
 
 Locate the trusted toolkit from this SKILL.md's ancestors: use the first ancestor containing core/scripts/project_client.py (plugin, toolkit is core/) or scripts/project_client.py (source checkout). Never discover an executable by searching the client folder. Read the toolkit's docs/client-onboarding.md, docs/intake.md and docs/storage-boundaries.md.
 

@@ -1,14 +1,16 @@
 # Release validation and acceptance limits
 
-Version-Timestamp: 2026-09-11 16:04:41 AST
+Version-Timestamp: 2026-09-11 16:14:13 AST
 
-Version 0.7.0 is a supervised pilot. It renames nested starter records to lowercase, adds a migration for projects created with 0.6, cleans up generated Markdown, and adds line-ending protection for starter records. The setup inspector and the new, adopt and resume helpers from 0.6.0 are unchanged in purpose.
+Version 0.7.1 is a supervised pilot. It renames nested starter records to lowercase, adds a migration for projects created with 0.6, cleans up generated Markdown, and adds line-ending protection for starter records. The setup inspector and the new, adopt and resume helpers from 0.6.0 are unchanged in purpose.
+
+0.7.1 corrects a packaging defect in 0.7.0: the plugin package omitted the new .gitattributes and .editorconfig templates, so projects set up through the plugin did not receive them. The adoption check from the anonymous public clone caught it. Tests now adopt and start projects using only the packaged scripts, and require every template and skill file to be packaged. The migration also reports case-only renames that Git has not recorded, a trap on macOS and Windows.
 
 The private source keeps the raw test and review evidence. It is not copied here, because it can contain development paths and account metadata. This summary reports outcomes only.
 
 ## Checks run for this release
 
-- The source suite passed 231 tests on macOS. One test, which needs a case-sensitive filesystem, was skipped there.
+- The source suite passed 235 tests on macOS. One test, which needs a case-sensitive filesystem, was skipped there.
 - Continuous integration passed the same suite on Linux with Python 3.10 and Python 3.14. On Linux the case-sensitive test ran.
 - The learning-code import gate, learning-record validation and plugin package parity checks all passed.
 - A freshly generated project has no nested uppercase names and no double blank lines in its Markdown.

@@ -1,0 +1,14 @@
+# Version-Timestamp: {{ version_timestamp }}
+# Starter records are verified by the SHA-256 of their exact bytes. -text stops
+# Git converting line endings on checkout, for example through core.autocrlf on
+# Windows, which would make an unchanged record look changed. Add the same rule
+# for any other file you list as a checkpoint source.
+/project.json -text
+/PROJECT.md -text
+/QUALITY.md -text
+/.starter/** -text
+/config/** -text
+/context/** -text
+/memory/** -text
+/workflows/** -text
+/{{ profile }}/** -text

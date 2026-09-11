@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Version-Timestamp: 2026-09-11 15:58:29 AST
+# Version-Timestamp: 2026-09-11 16:14:13 AST
 """Move a 0.6 starter project to the 0.7 lowercase record layout.
 
 preview requires resume to be ready, then stages a sealed plan, exact candidate
@@ -17,6 +17,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 from project_learning import Store,Invalid,require,fields,digest,stamp,LEGACY_LAYOUT,exact_exists
 from project_memory import Continuity
@@ -170,6 +171,18 @@ def verify_sources(dst,plan,checkpoint,mapped=True):
         else:
             require(exact_exists(dst.root,current) and digest(dst.read(current))==evidence['sha256'],'Source changed since the last checkpoint: '+current)
 
+def tracked_legacy(root):
+    """Old names still recorded in Git. On a case-insensitive filesystem with
+    core.ignorecase, git add -A does not record a rename that changes only
+    letter case, so the repository keeps the old name while the disk has the new."""
+    try:
+        inside=subprocess.run(['git','-C',str(root),'rev-parse','--is-inside-work-tree'],capture_output=True,text=True,timeout=30)
+        if inside.returncode!=0 or inside.stdout.strip()!='true':return []
+        listed=subprocess.run(['git','-C',str(root),'ls-files','-z','--',*LEGACY_LAYOUT],capture_output=True,timeout=30).stdout
+    except (OSError,subprocess.SubprocessError):return []
+    names={n.decode('utf-8','replace') for n in listed.split(b'\0') if n}
+    return [old for old in LEGACY_LAYOUT if old in names]
+
 def finish(store,stage):
     plan,dst=load(store,stage);prior=dst.entries(RECEIPTS);parent=None
     for p in prior:
@@ -198,8 +211,10 @@ def finish(store,stage):
     receipt=sealed({'schema':'layout-migration-receipt.v1','Version-Timestamp':stamp(),'plan_id':plan['sha256'],'project_id':plan['project_id'],
                     'parent':parent,'renames':plan['renames'],'edits':plan['edits'],'checkpoint':checkpoint})
     dst.create(f'{RECEIPTS}/{len(prior)+1:04d}.json',receipt)
-    return {'status':'migrated','checkpoint':checkpoint,'receipt_head':receipt['sha256'],
-            'next_action':'Run upgrade_project.py preview, check and finish to receive the 0.7 helpers, workflows and skills.'}
+    restage=[f'git rm --cached -q {old} && git add {LEGACY_LAYOUT[old]}' for old in tracked_legacy(dst.root)]
+    action='Run upgrade_project.py preview, check and finish to receive the 0.7 helpers, workflows and skills.'
+    if restage:action='Record the renames in Git first, from the project root, because git add -A misses case-only renames on macOS and Windows: '+'; '.join(restage)+'. Then '+action[0].lower()+action[1:]
+    return {'status':'migrated','checkpoint':checkpoint,'receipt_head':receipt['sha256'],'git_restage':restage,'next_action':action}
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--workspace',required=True);sub=parser.add_subparsers(dest='command',required=True)
