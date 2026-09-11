@@ -5,8 +5,8 @@ description: Recover saved state and continue a project initialized with the IDE
 
 # Starter Resume
 
-Version-Timestamp: 2026-09-11 16:14:13 AST
-Kit-Version: 0.7.1-pilot
+Version-Timestamp: 2026-09-11 16:24:39 AST
+Kit-Version: 0.7.2-pilot
 
 Locate the project root containing project.json and .starter/project_memory.py from the current workspace. Do not use a different project's helper. If either is missing, stop recovery and report the missing prerequisite.
 

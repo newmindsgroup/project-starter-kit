@@ -1,7 +1,7 @@
 {
   "name": "ide-project-starter",
-  "version": "0.7.1",
-  "Version-Timestamp": "2026-09-11 16:14:13 AST",
+  "version": "0.7.2",
+  "Version-Timestamp": "2026-09-11 16:24:39 AST",
   "description": "Set up development projects with an agent-assisted wizard, preserved files and resumable work.",
   "author": {
     "name": "Daniel Gonell"

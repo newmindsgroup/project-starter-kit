@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Version-Timestamp: 2026-09-11 14:52:59 AST
+# Version-Timestamp: 2026-09-11 16:24:39 AST
 """Stage and verify reviewed project-copy upgrades. Never replaces project files."""
 import argparse
 import difflib
@@ -52,10 +52,24 @@ def protected(dst):
     require(len(names)<=2000,'Protected record inventory too large; use a reviewed migration')
     return {n:digest(dst.read(n)) for n in sorted(names)}
 
+def git_tracked_legacy(root):
+    """Old record names that Git still records. On macOS and Windows, git add -A
+    does not record a case-only rename, and a checkout or reset can then write
+    the old name back to disk, so a renamed file can drop out of the repository."""
+    try:
+        inside=subprocess.run(['git','-C',str(root),'rev-parse','--is-inside-work-tree'],capture_output=True,text=True,timeout=30)
+        if inside.returncode!=0 or inside.stdout.strip()!='true':return []
+        listed=subprocess.run(['git','-C',str(root),'ls-files','-z','--',*LEGACY_LAYOUT],capture_output=True,timeout=30).stdout
+    except (OSError,subprocess.SubprocessError):return []
+    names={n.decode('utf-8','replace') for n in listed.split(b'\0') if n}
+    return [old for old in LEGACY_LAYOUT if old in names]
+
 def preview(store,target,stage):
     dst=Store(destination(store,target));stage_path=store.path(stage)
     legacy=[old for old in LEGACY_LAYOUT if exact_exists(dst.root,old)]
     require(not legacy,'Old record names present ('+', '.join(legacy)+'); run migrate_layout.py preview, apply and finish first')
+    tracked=git_tracked_legacy(dst.root)
+    require(not tracked,'Git still records old names ('+', '.join(tracked)+'); run the git_restage commands printed by migrate_layout.py finish, then confirm with git ls-files')
     require(not stage_path.is_relative_to(dst.root) and not dst.root.is_relative_to(stage_path),'Upgrade staging must be outside the project')
     require(not stage_path.exists(),'Upgrade staging already exists; preserve or choose a new path')
     version,files=candidates();known,records=baseline(dst);before={};conflicts=[]

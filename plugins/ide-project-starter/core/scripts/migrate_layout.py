@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Version-Timestamp: 2026-09-11 16:14:13 AST
+# Version-Timestamp: 2026-09-11 16:24:39 AST
 """Move a 0.6 starter project to the 0.7 lowercase record layout.
 
 preview requires resume to be ready, then stages a sealed plan, exact candidate
@@ -213,7 +213,7 @@ def finish(store,stage):
     dst.create(f'{RECEIPTS}/{len(prior)+1:04d}.json',receipt)
     restage=[f'git rm --cached -q {old} && git add {LEGACY_LAYOUT[old]}' for old in tracked_legacy(dst.root)]
     action='Run upgrade_project.py preview, check and finish to receive the 0.7 helpers, workflows and skills.'
-    if restage:action='Record the renames in Git first, from the project root, because git add -A misses case-only renames on macOS and Windows: '+'; '.join(restage)+'. Then '+action[0].lower()+action[1:]
+    if restage:action='Record the renames in Git now, from the project root, before any checkout, reset, pull or commit, because git add -A misses case-only renames on macOS and Windows and a checkout can write the old name back: '+'; '.join(restage)+'. Confirm with git ls-files, then '+action[0].lower()+action[1:]
     return {'status':'migrated','checkpoint':checkpoint,'receipt_head':receipt['sha256'],'git_restage':restage,'next_action':action}
 
 def main():

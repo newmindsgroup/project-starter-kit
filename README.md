@@ -2,7 +2,7 @@
 
 **Give your next session a place to pick up.**
 
-Created by **Daniel Gonell** · v0.7.1 · Supervised pilot
+Created by **Daniel Gonell** · v0.7.2 · Supervised pilot
 
 Version-Timestamp: 2026-09-10 18:27:14 AST
 
