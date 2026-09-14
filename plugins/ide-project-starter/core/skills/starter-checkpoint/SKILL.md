@@ -5,8 +5,8 @@ description: Save a handoff or meaningful progress checkpoint in an IDE Project 
 
 # Starter Checkpoint
 
-Version-Timestamp: 2026-09-11 16:24:39 AST
-Kit-Version: 0.7.2-pilot
+Version-Timestamp: 2026-09-14 15:34:15 AST
+Kit-Version: 0.7.3-pilot
 
 Locate the root containing project.json and .starter/project_memory.py. If missing, report the prerequisite rather than initializing or overwriting identity.
 

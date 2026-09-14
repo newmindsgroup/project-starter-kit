@@ -2,7 +2,7 @@
 
 Version-Timestamp: {{ version_timestamp }}
 
-If context/INDEX.md or memory/STATE.md exists, this project predates kit 0.7.0. Follow the trusted toolkit's docs/project-upgrades.md and run migrate_layout.py first.
+Check exact directory-entry names, not Path.exists or shell -e: on a case-insensitive filesystem those also match lowercase files. List context/ and memory/ and compare the entry strings exactly; if access is unavailable, report layout verification as unavailable rather than infer it. Only actual entries named context/INDEX.md or memory/STATE.md indicate the legacy layout. If either exact legacy name is present, follow the trusted toolkit's docs/project-upgrades.md before resuming.
 
 1. Read PROJECT.md, context/index.md and QUALITY.md. Run `python3 -B .starter/project_memory.py resume`.
 2. Inspect the returned objective, constraints, decisions, completed work, recorded checks, blockers and next action. A needs_review status requires source reconciliation before action.
@@ -11,3 +11,5 @@ If context/INDEX.md or memory/STATE.md exists, this project predates kit 0.7.0. 
 5. Continue the recorded next action within existing authorization, then checkpoint meaningful progress.
 
 When client_context is needs_review or unavailable, reconcile the selected shared client sources or missing ancestor before dependent work. No source hash is automatically refreshed. A project opened without its client ancestor must state that limitation.
+
+A retained .starter/adoption-pending.json is not by itself unfinished adoption. Inspect .starter/installation.json and project.json: receipt schema installation.v1 with project_id equal to project.json project_id, receipt plan_id equal to the adoption-pending.v1 marker plan_id, and a valid checkpoint chain are evidence that finish completed. Report the retained marker and the matching evidence when concluding adoption completed. A missing, malformed or mismatched receipt requires reconciliation. Do not remove markers, rerun finish or declare adoption incomplete merely because the marker remains. Distinguish completed kit adoption from an application brief or quality checklist that still needs work.

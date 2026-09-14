@@ -1,8 +1,8 @@
 # Release validation and acceptance limits
 
-Version-Timestamp: 2026-09-11 16:24:39 AST
+Version-Timestamp: 2026-09-14 15:39:03 AST
 
-Version 0.7.2 is a supervised pilot. It renames nested starter records to lowercase, adds a migration for projects created with 0.6, cleans up generated Markdown, and adds line-ending protection for starter records. The setup inspector and the new, adopt and resume helpers from 0.6.0 are unchanged in purpose.
+Version 0.7.3 is a supervised pilot. It renames nested starter records to lowercase, adds a migration for projects created with 0.6, cleans up generated Markdown, and adds line-ending protection for starter records. The setup inspector and the new, adopt and resume helpers from 0.6.0 are unchanged in purpose.
 
 0.7.1 corrects a packaging defect in 0.7.0: the plugin package omitted the new .gitattributes and .editorconfig templates, so projects set up through the plugin did not receive them. The adoption check from the anonymous public clone caught it. Tests now adopt and start projects using only the packaged scripts, and require every template and skill file to be packaged. The migration also reports case-only renames that Git has not recorded, a trap on macOS and Windows.
 
@@ -10,7 +10,7 @@ Version 0.7.2 is a supervised pilot. It renames nested starter records to lowerc
 
 The private source keeps the raw test and review evidence. It is not copied here, because it can contain development paths and account metadata. This summary reports outcomes only.
 
-## Checks run for this release
+## Prior 0.7.2 checks
 
 - The source suite passed 236 tests on macOS. One test, which needs a case-sensitive filesystem, was skipped there.
 - Continuous integration passed the same suite on Linux with Python 3.10 and Python 3.14. On Linux the case-sensitive test ran.
@@ -19,9 +19,15 @@ The private source keeps the raw test and review evidence. It is not copied here
 - Every relative link in the kit's live documentation resolves with exact letter case.
 - A fictional project was adopted using only the scripts in this public release, from an anonymous clone. Resume recovered its state, and its original files were preserved.
 
-## Independent review
+## Prior independent review
 
 An independent review before release found six defects in the new migration and adoption paths, two of them release blockers. All six are fixed and covered by regression tests. A second independent review verified the fixes by reproducing each original failure, including crash and tamper tests. It found one remaining gap and three minor points, which were then fixed.
+
+## 0.7.3 resume guidance
+
+Version-Timestamp: 2026-09-14 15:35:02 AST
+
+A fresh Codex CLI session recovered the checkpoint but incorrectly treated the retained adoption marker as unfinished setup. Resume instructions now require checking the matching installation receipt and checkpoint chain. Exact directory-entry case is required for legacy filename checks on case-insensitive systems. The helper runtime and checkpoint schema are unchanged. The source suite ran 238 tests successfully, with two case-sensitive-filesystem tests skipped on macOS. Post-review packaged behavior checks also passed. A second fresh Codex CLI session correctly recognized completed adoption and recovered the checkpoint under the same neutral prompt. A separate fresh Codex session with a deliberately mismatched receipt correctly reported adoption completion as unconfirmed and required reconciliation. These are observed positive/negative passes, not a guarantee of every future model response.
 
 ## Still unverified
 

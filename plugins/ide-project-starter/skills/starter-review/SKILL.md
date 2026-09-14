@@ -5,8 +5,8 @@ description: Review recorded lessons, repeated errors and skill gaps in an IDE P
 
 # Starter Review
 
-Version-Timestamp: 2026-09-11 16:24:39 AST
-Kit-Version: 0.7.2-pilot
+Version-Timestamp: 2026-09-14 15:34:15 AST
+Kit-Version: 0.7.3-pilot
 
 Locate project.json, config/learning-skills.json and .starter/project_learning.py. If missing, report the prerequisite. Follow workflows/review-project.md, using that project's helper and records.
 

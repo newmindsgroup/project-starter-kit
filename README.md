@@ -2,9 +2,9 @@
 
 **Give your next session a place to pick up.**
 
-Created by **Daniel Gonell** · v0.7.2 · Supervised pilot
+Created by **Daniel Gonell** · v0.7.3 · Supervised pilot
 
-Version-Timestamp: 2026-09-10 18:27:14 AST
+Version-Timestamp: 2026-09-14 15:39:03 AST
 
 A shared foundation for Codex and Claude Code projects. Bring an idea, an existing app, or a folder of approved context. The kit helps your AI organize the work, preserve decisions and save a handoff that travels with the project.
 
