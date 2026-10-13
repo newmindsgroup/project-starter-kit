@@ -2,7 +2,7 @@
   "author": {
     "name": "Daniel Gonell"
   },
-  "description": "Set up development projects with an agent-assisted wizard, preserved files and resumable work.",
+  "description": "Set up and resume projects with durable context and optional manual Project Blueprint metadata import and timers.",
   "interface": {
     "capabilities": [
       "Project onboarding",
@@ -13,11 +13,11 @@
     "defaultPrompt": "Use project-starter to start, adopt or resume this authorized project.",
     "developerName": "Daniel Gonell",
     "displayName": "IDE Project Starter",
-    "longDescription": "Set up development projects with an agent-assisted wizard, preserved files and resumable work.",
+    "longDescription": "Set up and resume projects with durable context and optional manual Project Blueprint metadata import and timers.",
     "shortDescription": "Start and resume projects with durable context."
   },
   "license": "MIT",
   "name": "ide-project-starter",
   "skills": "./skills/",
-  "version": "0.7.3"
+  "version": "0.8.0"
 }

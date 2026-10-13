@@ -10,8 +10,8 @@
     {
       "name": "ide-project-starter",
       "source": "./plugins/ide-project-starter",
-      "description": "Set up, adopt and resume projects with portable records.",
-      "version": "0.7.3"
+      "description": "Set up and resume projects with durable context and optional manual Project Blueprint metadata import and timers.",
+      "version": "0.8.0"
     }
   ]
 }

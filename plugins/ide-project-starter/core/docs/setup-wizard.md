@@ -1,6 +1,6 @@
 # Easy project setup
 
-Version-Timestamp: 2026-09-10 13:11:22 AST
+Version-Timestamp: 2026-10-13 11:06:35 AST
 
 Tell your agent:
 
@@ -17,6 +17,14 @@ Use inspected project instructions first. Do not ask questions the conversation 
 If no product objective has been supplied and the request is only setup, use the explicit provisional objective: "Prepare this project for reliable development and resumable work." Record the product objective as unresolved for the next work phase. This is not permission to invent an application or requirements. Use the software foundation for development, including scripts, APIs, websites, desktop programs, games, libraries and mobile applications. Framework hints do not alter initializer inputs or scaffold a stack.
 
 Ask at most two short questions together when required: which project to use if ambiguous, and the intended result or sharing audience if needed before storing context. Ask further only for a newly discovered consequential conflict. When audience is unknown, do neutral setup only if its destination is authorized; do not copy client/business context or label the folder private. Mark source intake blocked until sharing is resolved. Purpose and audience are separate concepts.
+
+## 0. Prepare an authorized new directory when needed
+
+The inspector needs an existing directory. If the user requests a brand-new project from a client workspace, first resolve the exact child path, approved parent workspace and who may access the setup records. Reuse an existing target unchanged. When the target is absent, create only that directory and any explicitly authorized missing layout parents. Do not guess a path or create an unapproved subtree.
+
+Inspect the target and every ancestor for symlinks before creation. If a path component is a symlink, or the canonical path falls outside the approved workspace, stop and resolve the destination before any write. Do not initialize the client root or delete files to make a directory empty. Creation is a separate authorized write; the inspector below stays read-only and never creates directories.
+
+Keep intake inputs and plans in a designated, approved setup-records location in the parent workspace outside the project target. Directory creation does not expand the audience or authorize publication. Once the exact target exists, run inspection and follow its new, adopt, resume or recovery result.
 
 ## 1. Inspect without changing anything
 
@@ -64,6 +72,12 @@ Report: what was set up; where saved work lives; what was preserved; actual reco
 > Start a fresh task in this project and ask: "Resume this project and tell me the next step."
 
 Do not ask the user to remember skill names or internal file paths. Existing project instructions point the next agent to the workflow. A checkpoint is local until an authorized commit/push backs it up. A plugin update and upgrading an existing project's helper copies are separate operations.
+
+## Registering the project in a desktop app
+
+Filesystem setup, a valid checkpoint and desktop sidebar registration are separate outcomes. Discover the current app's supported project tools before promising registration. A task-creation tool that accepts an existing project ID does not create or register a project. Do not substitute an unrelated task or a new remote repository for the requested project.
+
+If the app offers a supported add-project action, use it within the user's request and verify that the selected folder appears in the project list. If no action exists or UI automation is explicitly denied, finish the workspace and recovery checks, then give the user the exact folder to select in the app. Do not bypass a denial with another automation method or edit private app settings. Record registration as pending until the user confirms it or a supported project-list tool verifies the exact folder. Do not use another UI automation method to verify after a denial. A later task in that project is a separate operation and needs the user's request.
 
 ## Optional: make it available in the agent tool
 
