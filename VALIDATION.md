@@ -1,5 +1,15 @@
 # Release validation and acceptance limits
 
+## 0.8.0 release scope
+
+Version-Timestamp: 2026-10-13 10:54:14 AST
+
+This release includes the reviewed manual Project Blueprint feature inside Project Starter Kit. Source and packaged checks cover selected metadata import, duplicate protection, explicit timer history, append-only corrections and scoped create-only recovery. Two real pilot tasks remain unselected; dashboard, automatic collection and economic comparisons remain future scope. Publication is distribution, not activation or evidence of complete financial tracking.
+
+Local pre-release checks: the source suite passed 298 tests on macOS with Python 3.14, with 2 existing skips. Package parity passed. The expanded packaged suite passed 10 tests, including all three adapter imports, history recovery, explicit-storage refusal and package immutability. Continuous integration passed 299 tests on Linux with Python 3.10 and 3.14, and on macOS with Python 3.14 (2 existing macOS skips). The integration candidate passed learning, syntax/runtime and package parity gates. Final documentation-only refinements retain the same runtime; the maintainer checks the final pull-request head before merge. The previous public distribution matched all 74 files from its trusted source commit.
+
+The earlier release evidence below remains historical.
+
 Version-Timestamp: 2026-09-14 15:39:03 AST
 
 Version 0.7.3 is a supervised pilot. It renames nested starter records to lowercase, adds a migration for projects created with 0.6, cleans up generated Markdown, and adds line-ending protection for starter records. The setup inspector and the new, adopt and resume helpers from 0.6.0 are unchanged in purpose.
@@ -33,6 +43,9 @@ A fresh Codex CLI session recovered the checkpoint but incorrectly treated the r
 
 The following have not been demonstrated:
 
+- two real Project Blueprint pilot tasks
+- complete compatibility with every native log version
+- measured human attention beyond explicit self-report
 - an independent non-developer completing onboarding without assistance
 - a physical second computer
 - Windows initialization

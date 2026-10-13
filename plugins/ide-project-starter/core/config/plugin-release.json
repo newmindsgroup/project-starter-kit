@@ -1,8 +1,8 @@
 {
   "name": "ide-project-starter",
-  "version": "0.7.3",
-  "Version-Timestamp": "2026-09-14 15:34:15 AST",
-  "description": "Set up development projects with an agent-assisted wizard, preserved files and resumable work.",
+  "version": "0.8.0",
+  "Version-Timestamp": "2026-10-13 11:01:06 AST",
+  "description": "Set up and resume projects with durable context and optional manual Project Blueprint metadata import and timers.",
   "author": {
     "name": "Daniel Gonell"
   },

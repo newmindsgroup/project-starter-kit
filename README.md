@@ -2,9 +2,9 @@
 
 **Give your next session a place to pick up.**
 
-Created by **Daniel Gonell** · v0.7.3 · Supervised pilot
+Created by **Daniel Gonell** · v0.8.0 · Supervised pilot
 
-Version-Timestamp: 2026-09-14 15:39:03 AST
+Version-Timestamp: 2026-10-13 10:54:14 AST
 
 A shared foundation for Codex and Claude Code projects. Bring an idea, an existing app, or a folder of approved context. The kit helps your AI organize the work, preserve decisions and save a handoff that travels with the project.
 
@@ -57,6 +57,7 @@ The foundation works with software and business/research profiles. It does not c
 | Part | Its job |
 | --- | --- |
 | **4 skills** | Guide setup, resume, checkpoint and learning review. |
+| **Optional Project Blueprint** | Manual usage imports, human timers, scoped history backup and corrections. |
 | **Python helpers** | Inspect project state, preview changes, preserve identities, save records and verify recovery. |
 | **Templates** | Create the project brief, context register, quality notes, workflow files and portable helpers. |
 | **Plugin manifests** | Make the workflows discoverable in Codex and Claude Code. |
@@ -161,6 +162,15 @@ A plugin update changes the shared workflows available for future use. It does *
 The learning workflow can record observations and propose a reusable skill. It does not retrain the AI, approve proposals, activate skills or upload private feedback automatically.
 
 [Release and verification process](docs/releases.md) · [Contributing](CONTRIBUTING.md) · [Project upgrades](plugins/ide-project-starter/core/docs/project-upgrades.md)
+
+## Optional Project Blueprint feature
+
+Project Blueprint is a feature inside this Starter Kit. Its manual helpers import selected Codex, Claude Code and completed Ollama metadata, track explicit human timers, and preserve project-scoped history with corrections and confirmations.
+
+See the [capability boundaries](plugins/ide-project-starter/core/docs/blueprint-capabilities.md). Read the [telemetry guide](plugins/ide-project-starter/core/docs/blueprint-collector.md) and [two-task pilot packet](plugins/ide-project-starter/core/docs/blueprint-two-task-pilot.md). From the packaged core directory, run `python3 -B scripts/project_blueprint.py --help`. Use private local storage outside Git and cloud sync.
+
+Native record formats are version-dependent; fixture tests and selected metadata checks do not prove every future session is supported. No background collector, dashboard, automatic project installation or financial savings calculation is activated. Native usage does not prove billing or complete coverage; human timers and confirmations are self-reports. The plugin remains ide-project-starter with four skills. Existing installations need a reviewed update.
+
 
 ## Readiness, limits and support
 
