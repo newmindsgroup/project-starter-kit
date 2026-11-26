@@ -1,6 +1,6 @@
 # Easy project setup
 
-Version-Timestamp: 2026-10-13 11:06:35 AST
+Version-Timestamp: 2026-11-26 11:08:42 AST
 
 Tell your agent:
 
@@ -44,7 +44,7 @@ Symlink roots/ancestors are refused. Known metadata symlinks require reconciliat
 
 | Inspector result | Agent action |
 | --- | --- |
-| new | Assemble the six-field brief and use quickstart.md preview/apply. |
+| new | Assemble the six-field brief and use quickstart.md preview/apply. For software, the optional development defaults are included unless the user declines them (`"dev_defaults": false`). |
 | adopt | Read the relevant existing context and assemble adopt-existing.md brief/state input. Use preview/apply/finish. |
 | resume | Verify helper provenance and existing records, then run the trusted resume workflow. Preserve identity. |
 | recover | Find the matching interrupted plan/receipt or existing records and follow documented recovery. Never restart with a new identity. |

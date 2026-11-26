@@ -15,3 +15,9 @@ node_modules/
 
 .starter-work/
 .starter-tools/
+{% if dev_setup %}
+# Pinned local tools (code map runtime), the local graph and token reports stay out of Git.
+.local/
+graphify-out/
+session-report-*.html
+{% endif %}

@@ -1,0 +1,27 @@
+# Pull request policy
+
+Version-Timestamp: {{ version_timestamp }}
+
+Every pull request gets an AI code review and a security review before it merges. The rule is in AGENTS.md; this page describes the loop.
+
+## The loop
+
+1. Open the pull request with a description of the change, the checks you ran and their results.
+2. Run an AI code review, for example `/code-review` from the code-review plugin, or a reviewer agent that has not seen your reasoning.
+3. Run a security review, for example `/security-review`, or the claude-security plugin for a larger change. Security findings are reports: fix them in this branch or in a follow-up pull request; no tool merges or deploys on its own.
+4. Fix each valid finding, or answer it with the reason it does not apply. Then review again, until a review comes back clean.
+5. Merge only when both reviews are clean and CI is green on the latest commit. A person, or an agent with that person's explicit approval, decides the merge.
+
+## Record the review
+
+Add a comment or a section in the pull request description that says:
+
+- which reviews ran (tool or agent, and the commit they reviewed);
+- the findings and what happened to each (fixed in which commit, or why not);
+- the final clean review and the CI run it matched.
+
+Keep secrets, client data and session reports out of these notes.
+
+## When a review cannot run
+
+If a review tool is unavailable, say so on the pull request and run the closest alternative, such as a careful manual review with the same checklist. Do not record a review that did not happen.

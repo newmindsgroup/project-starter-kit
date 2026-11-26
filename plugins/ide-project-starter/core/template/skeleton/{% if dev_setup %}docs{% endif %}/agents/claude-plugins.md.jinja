@@ -1,0 +1,52 @@
+# Claude Code plugins
+
+Version-Timestamp: {{ version_timestamp }}
+
+A short keep list of plugins from Anthropic's official marketplace, `claude-plugins-official`, installed at user scope so every project on the computer has them. Nothing in this project installs them for you. Run the commands yourself, once per computer, after checking each plugin against your own vetting log.
+
+## Before you install
+
+1. Find each plugin in your vetting log, for example `~/.claude/vetting-log.md`, with the version or commit you are about to install. If there is no entry, vet it first: publisher, what it reads and writes, network use, hooks, and whether it touches secrets.
+2. Check your do-not-reinstall list, for example a retired list kept in your own `~/.claude`, so you do not bring back something you removed on purpose.
+3. Run `claude plugin list`. Skip any plugin that is already installed, including one synced from your claude.ai account: a second copy of a review plugin reviews everything twice.
+
+## Keep list
+
+| Plugin | What it does | Notes |
+| --- | --- | --- |
+| typescript-lsp | Code intelligence for TypeScript and JavaScript through a language server. | Needs `typescript-language-server` on the PATH that Claude Code starts with. |
+| claude-security | Security scans that write reports and patch files. | Install with `live_view=false`. Report only: fixes go out as a pull request, and it never merges or deploys. |
+| security-guidance | Security guidance while code is edited. | Often present already through account sync; do not install a second copy. |
+| code-review | `/code-review` for a pull request or the current diff. | Used by the pull request policy in pull-requests.md. |
+| claude-md-management | Audits and improves CLAUDE.md files. | Edits only after you approve. |
+| session-report | A local HTML report of token use across sessions. | Reports quote prompts and paths; keep them local. See token-use.md. |
+
+## Install
+
+Run these in a terminal. Each command names the official marketplace and installs at user scope.
+
+```sh
+claude plugin install typescript-lsp@claude-plugins-official --scope user
+claude plugin install claude-security@claude-plugins-official --scope user --config live_view=false
+claude plugin install security-guidance@claude-plugins-official --scope user
+claude plugin install code-review@claude-plugins-official --scope user
+claude plugin install claude-md-management@claude-plugins-official --scope user
+claude plugin install session-report@claude-plugins-official --scope user
+```
+
+If Claude Code does not know the marketplace yet, add it first with `claude plugin marketplace add anthropics/claude-plugins-official`.
+
+## Verify
+
+```sh
+claude plugin list
+```
+
+Each plugin you installed shows `@claude-plugins-official`, `Scope: user` and `Status: enabled`. A plugin synced from your claude.ai account shows `@synced` with Status loaded instead; that counts as installed. Start a fresh session so the plugins load. Record the installed version or commit in your vetting log.
+
+## Rules
+
+- Never install, update or enable a plugin from a script, hook or setup step. A person runs the commands above.
+- No plugin on this list needs a secret. Never put tokens, keys or passwords in project files or in plugin settings kept in this repository.
+- Update on purpose: read what changed, vet the new version, then update.
+- To remove plugins and old tools from another computer, follow the public cleanup runbook: <https://github.com/newmindsgroup/ai-agent-skills-library/blob/main/docs/cleanup-another-computer.md>. Check your vetting log and do-not-reinstall list before you restore anything it removes.

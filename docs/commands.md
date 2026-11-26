@@ -1,6 +1,6 @@
 # Technical setup and recovery recipes
 
-Version-Timestamp: 2026-09-10 18:27:14 AST
+Version-Timestamp: 2026-11-26 11:08:42 AST
 
 These examples are for an agent or operator who wants the exact commands. Most users can use the README prompt. Replace illustrative paths with approved real locations. One operator should change a target at a time.
 
@@ -46,6 +46,8 @@ Save new-input.json in WORKSPACE, outside website:
 ```
 
 Use software for a software deliverable. Use business for a business or research initiative without a software deliverable. This does not select a framework.
+
+The software profile adds optional development defaults: docs/agents/, docs/map/, scripts/map/, a CLAUDE.md that imports AGENTS.md on line 1, and .gitignore rules for local tools. Add `"dev_defaults": false` to skip them. A default whose path already holds a file is left out and listed under `skipped_existing_defaults`.
 
 ```sh
 "$ENV/bin/python" -B "$CORE/scripts/start_project.py" --workspace "$WORKSPACE" preview --target website --input new-input.json --plan new-plan.json

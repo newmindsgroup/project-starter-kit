@@ -1,0 +1,33 @@
+# Agent reference
+
+Version-Timestamp: {{ version_timestamp }}
+
+Reference material for AI agents working in this code project. AGENTS.md and CLAUDE.md hold the rules; this folder holds the detail they link to. Read a page when its task comes up, not at the start of every session.
+
+| Page | Read it when |
+| --- | --- |
+| [claude-plugins.md](claude-plugins.md) | You set up Claude Code on a computer or check its plugins. |
+| [pull-requests.md](pull-requests.md) | You open, review or merge a pull request. |
+| [token-use.md](token-use.md) | You review how sessions spend tokens, for example once a week. |
+| [../map/README.md](../map/README.md) | You need to find code fast, or rebuild the optional code map. |
+
+These pages are optional development defaults from the starter kit. Change them to fit the project; the kit does not overwrite them later.
+
+## The CLAUDE.md pattern
+
+- Line 1 of CLAUDE.md is `@AGENTS.md`. Claude Code reads CLAUDE.md and not AGENTS.md, so the import makes it load AGENTS.md, which Codex and other tools read directly. One shared file keeps the tools from drifting apart.
+- CLAUDE.md stays short: rules only, plus anything that applies to Claude Code alone. Every line loads into every session and costs tokens and attention.
+- Long reference material, such as setup recipes, policies with examples and runbooks, goes into a linked page in docs/agents/. Link it from the rule that needs it.
+- Prefer the import to a symlink. A symlink needs extra rights on Windows, and some tools do not follow it.
+
+In a project that adopted the kit, the import arrives inside the appended starter block. Move it to line 1 the next time you review CLAUDE.md.
+
+## Trimming instructions without losing rules
+
+Before you shorten AGENTS.md or CLAUDE.md, write a rule inventory: one row per rule in the old files, with its new home (a line in AGENTS.md, CLAUDE.md or a page here) and its fate (kept, merged with another rule, or removed and why). Every old rule appears exactly once. Put the inventory in the pull request description so the reviewer can check that nothing was dropped silently.
+
+| Old rule (file and line) | New home | Fate |
+| --- | --- | --- |
+| Example: CLAUDE.md line 12, run the tests before a push | AGENTS.md, Checks | Kept |
+
+The claude-md-management plugin ([claude-plugins.md](claude-plugins.md)) audits CLAUDE.md files and proposes improvements; it edits only after you approve. Use it for a periodic audit, and still write the inventory for any trim.

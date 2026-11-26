@@ -7,7 +7,9 @@ Profile: {{ profile }}.
 
 {% if profile == 'software' -%}
 Document the real test, lint, typecheck, build and security commands after inspecting the actual stack. No application framework or fabricated passing check is supplied by this template.
-{% else -%}
+{% if dev_setup %}
+Every pull request also gets an AI code review and a security review before merge; docs/agents/pull-requests.md describes the loop and how to record it.
+{% endif %}{% else -%}
 Document evidence sources, assumption checks, decision criteria and review responsibilities. Software tests are not a substitute for business evidence.
 {% endif %}
 Continuity checks available now:

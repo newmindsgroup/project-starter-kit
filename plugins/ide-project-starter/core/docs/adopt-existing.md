@@ -1,6 +1,6 @@
 # Adopt an existing project
 
-Version-Timestamp: 2026-09-09T17:55:08.294286-04:00
+Version-Timestamp: 2026-11-26 11:08:42 AST
 Status: supervised adoption. Existing application layout remains intact.
 
 Invoke project-starter and say "Adopt this existing project." The same four skills serve both starting modes. Read storage-boundaries.md first. Identify the actual project/repository root, source material, storage audiences, existing instructions, uncommitted work and any existing memory system. No Git operation, provider action or dependency execution is an intake side effect.
@@ -24,6 +24,8 @@ WORKSPACE="/absolute/path/to/client-folder"
 ```
 
 Preview writes only the plan and temporary rendering scratch. The plan records SHA-256 hashes of raw UTF-8 bytes, original preserved text, exact additions and exact append blocks. Review it before apply. The plan can contain confidential current context and instructions. Preserve it as the recovery record in an approved destination.
+
+For a software brief, the optional development defaults (docs/agents/, docs/map/, scripts/map/ and the `@AGENTS.md` import inside the CLAUDE.md block) are part of the preview. Any default whose path already exists is left out and listed under `skipped_existing_defaults`; the application's own file stays untouched. Add `"dev_defaults": false` to the brief to skip all of them. See quickstart.md.
 
 The helper preserves existing README.md, PROJECT.md, QUALITY.md, context/index.md and profile work documents. It creates missing standard files. Existing AGENTS.md and CLAUDE.md receive proposed append blocks, not automatic replacement. Review all existing rules and block content for compatibility. Append the returned UTF-8 block bytes exactly once, retaining every original byte, including BOM, CRLF and missing final newline. This append is a deliberate agent-performed edit within the authorized adoption, not a separate request for blanket approval. Never change earlier instructions to force completion. If policy conflicts require a semantic merge, stop this automatic path and prepare a separately reviewed manual migration.
 

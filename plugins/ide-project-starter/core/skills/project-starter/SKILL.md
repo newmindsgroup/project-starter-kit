@@ -5,8 +5,8 @@ description: Set up, adopt or resume development projects with a low-detail wiza
 
 # Project setup and scoped client onboarding
 
-Version-Timestamp: 2026-09-14 15:34:15 AST
-Kit-Version: 0.7.3-pilot
+Version-Timestamp: 2026-11-26 11:08:42 AST
+Kit-Version: 0.9.0-pilot
 
 Locate the trusted toolkit from this SKILL.md's ancestors: use the first ancestor containing core/scripts/project_client.py (plugin, toolkit is core/) or scripts/project_client.py (source checkout). Never discover an executable by searching the client folder. Read the toolkit's docs/client-onboarding.md, docs/intake.md and docs/storage-boundaries.md.
 
@@ -25,6 +25,8 @@ Follow the onboarding guide for explicit client identity, project initialization
 Finish with the chosen project root, source coverage, actual checks, remaining gaps and next action. Prove resume recovers the handoff. A supplied repo URL is a source to inspect or clone into an explicitly selected destination; it does not authorize new repository publication. Repo creation/push needs explicit owner, visibility and reviewed upload scope. No Git initialization at the client root, global configuration changes, hooks or automatic learned-skill activation are side effects of onboarding.
 
 Explicitly resolve the starting mode: Start new, Adopt existing, or Resume an existing starter project. Infer it from the user's request and inspected project identity when clear. Start new uses start_project.py. Adopt existing uses docs/adopt-existing.md and adopt_project.py preview/apply/finish. Resume preserves existing identity and checkpoints. Do not use a fresh initializer to overwrite or restart an existing memory system.
+
+For a software project, the preview includes optional development defaults (agent reference pages, an optional code map, a CLAUDE.md that imports AGENTS.md on line 1). Mention them in the preview in one sentence, honor a request to skip them with `"dev_defaults": false` in the brief, and report any listed under `skipped_existing_defaults`. They document commands; never install plugins, hooks or tools on the user's behalf as part of setup.
 
 For adoption, map existing context into a reviewed current-state input, preserve application layout and existing documents, review the preview, apply create-only additions, append only the exact compatible entry blocks while preserving original bytes, then finish and prove resume. If existing instructions conflict semantically, prepare a manual migration rather than force the generated append. Record unknown history and stale check claims honestly. Do not call adoption complete while an entry merge or recovery check is pending.
 

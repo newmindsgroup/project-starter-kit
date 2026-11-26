@@ -1,0 +1,28 @@
+#!/bin/sh
+# Version-Timestamp: 2026-11-26 11:08:42 AST
+# Optional code map refresh after each commit. Off by default: Git runs it only
+# after you copy it into the hooks folder (git rev-parse --git-path hooks) as
+# post-commit and make it executable.
+# It never blocks a commit: it starts the refresh in the background and exits 0.
+# It never touches the network: graph.py blocks connections and areas.py reads files only.
+# It runs only this project's own pinned runtime from scripts/map/requirements.txt.
+# It does not commit anything. See docs/map/README.md.
+
+root=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+pin=$(sed -n 's/^graphifyy==\([0-9A-Za-z.!+]*\)[[:blank:]]*--hash=.*/\1/p' "$root/scripts/map/requirements.txt" 2>/dev/null | head -n 1)
+[ -n "$pin" ] || exit 0
+common=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) || exit 0
+py="$root/.local/tools/graphify-$pin/bin/python"
+[ -x "$py" ] || py="$(dirname "$common")/.local/tools/graphify-$pin/bin/python"
+[ -x "$py" ] || exit 0
+mkdir -p "$root/.local" 2>/dev/null || exit 0
+lock="$root/.local/map-refresh.lock"
+# A lock older than 30 minutes belongs to a refresh that died; clear it.
+find "$lock" -maxdepth 0 -type d -mmin +30 -exec rmdir {} \; 2>/dev/null
+mkdir "$lock" 2>/dev/null || exit 0
+(
+  trap 'rmdir "$lock"' EXIT
+  trap 'exit 1' HUP INT TERM
+  cd "$root" && "$py" -I scripts/map/graph.py build && "$py" -I scripts/map/areas.py --root "$root"
+) >"$root/.local/map-refresh.log" 2>&1 </dev/null &
+exit 0

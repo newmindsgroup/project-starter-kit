@@ -1,6 +1,6 @@
 # Start your next project
 
-Version-Timestamp: 2026-09-09T17:55:08.294286-04:00
+Version-Timestamp: 2026-11-26 11:08:42 AST
 
 Keep your company/client/project folders. After installing the private plugin, create or select a Codex project pointing to the intended local folder, then start a task inside it. In Claude Code, start a fresh session in that folder. Say:
 
@@ -44,6 +44,10 @@ Create a dedicated target and a six-field input file. Existing context first fol
   "success_criteria": ["A documented first milestone and next action"]
 }
 ```
+
+### Development defaults for code projects
+
+The software profile also adds optional development defaults: agent reference pages in docs/agents/ (Claude Code plugin keep list with install commands, token-use report, pull request review policy, the short CLAUDE.md pattern), an optional code map in docs/map/ with its helpers in scripts/map/, a CLAUDE.md whose first line is `@AGENTS.md`, and .gitignore rules for local tools and reports. Nothing is installed, enabled or run: the pages document commands for a person to run. To skip them, add `"dev_defaults": false` to the brief. The preview lists every file it will create; a default whose path already holds a different file is left out and listed under `skipped_existing_defaults`, so existing files always win. The business profile is unchanged.
 
 For adoption, put these six fields under brief and provide a separate state object. brief.objective and state.objective must match exactly, including whitespace and punctuation. Adopt paths --target, --input and --plan are workspace-relative; state.sources is project-relative and excludes AGENTS.md and CLAUDE.md. See adopt-existing.md for concrete commands.
 
