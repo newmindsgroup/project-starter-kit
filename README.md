@@ -2,9 +2,9 @@
 
 **Give your next session a place to pick up.**
 
-Created by **Daniel Gonell** · v0.8.0 · Supervised pilot
+Created by **Daniel Gonell** · v0.9.0 · Supervised pilot
 
-Version-Timestamp: 2026-10-13 10:54:14 AST
+Version-Timestamp: 2026-11-26 11:08:42 AST
 
 A shared foundation for Codex and Claude Code projects. Bring an idea, an existing app, or a folder of approved context. The kit helps your AI organize the work, preserve decisions and save a handoff that travels with the project.
 
@@ -57,6 +57,7 @@ The foundation works with software and business/research profiles. It does not c
 | Part | Its job |
 | --- | --- |
 | **4 skills** | Guide setup, resume, checkpoint and learning review. |
+| **Development defaults** | For code projects: agent reference pages, an optional code map, a short CLAUDE.md and a pull request review policy. Skippable. |
 | **Optional Project Blueprint** | Manual usage imports, human timers, scoped history backup and corrections. |
 | **Python helpers** | Inspect project state, preview changes, preserve identities, save records and verify recovery. |
 | **Templates** | Create the project brief, context register, quality notes, workflow files and portable helpers. |
@@ -162,6 +163,20 @@ A plugin update changes the shared workflows available for future use. It does *
 The learning workflow can record observations and propose a reusable skill. It does not retrain the AI, approve proposals, activate skills or upload private feedback automatically.
 
 [Release and verification process](docs/releases.md) · [Contributing](CONTRIBUTING.md) · [Project upgrades](plugins/ide-project-starter/core/docs/project-upgrades.md)
+
+## Development defaults for code projects
+
+New in 0.9.0. A software project also receives the defaults used in our own projects. They are previewed with everything else, can be skipped with `"dev_defaults": false` in the brief, and never replace a file the project already has: a colliding default is left out and listed in the preview.
+
+| Default | What the project gets |
+| --- | --- |
+| **Short CLAUDE.md** | Line 1 is `@AGENTS.md`, so Claude Code loads the same rules Codex reads. CLAUDE.md holds rules only; reference material lives in `docs/agents/`. A rule inventory keeps trims honest. |
+| **Claude Code plugin keep list** | `docs/agents/claude-plugins.md` lists six plugins from the official `claude-plugins-official` marketplace with the exact `claude plugin install <name>@claude-plugins-official --scope user` commands and a `claude plugin list` check. A person runs them; the kit installs nothing. |
+| **Token-use report** | `docs/agents/token-use.md` explains a weekly session-report run, keeping reports local because they quote prompts, and the usual fixes. |
+| **Pull request policy** | An AI code review and a security review on every pull request, fix and review again, merge only when clean and CI is green, and record the review on the pull request. |
+| **Optional code map** | `docs/map/` with a generated `areas.md` (areas, folders, key symbols, docs that explain them) and helpers in `scripts/map/`. The graph runtime is optional and only ever a hash-locked virtual environment under the project's gitignored `.local/tools/`, never a global install. An opt-in post-commit hook refreshes it in the background, never blocks a commit and never uses the network; the hook has been tested on macOS only. |
+
+Check every plugin or tool against your own vetting log and do-not-reinstall list (for example files in your own `~/.claude`) before installing. To clean old tools off another computer, see the public [cleanup runbook](https://github.com/newmindsgroup/ai-agent-skills-library/blob/main/docs/cleanup-another-computer.md).
 
 ## Optional Project Blueprint feature
 

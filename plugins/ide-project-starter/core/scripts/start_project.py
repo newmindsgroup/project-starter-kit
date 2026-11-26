@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Version-Timestamp: 2026-09-08T17:52:11.763839-04:00
+# Version-Timestamp: 2026-11-26 11:08:42 AST
 """Preview and apply the bundled template within an explicit workspace boundary."""
 import argparse
 import json
@@ -14,11 +14,30 @@ from project_memory import make_checkpoint
 
 BASE=Path(__file__).resolve().parents[1]
 
+# Optional software-profile defaults. They never replace or block an existing file:
+# a default whose path already holds other content is left out of the plan.
+DEV_DEFAULTS=('docs/agents/','docs/map/','scripts/map/')
+
 def spec_check(spec):
-    fields(spec,{'name','profile','objective','audience','constraints','success_criteria'})
+    fields(spec,{'name','profile','objective','audience','constraints','success_criteria'}|({'dev_defaults'} if isinstance(spec,dict) and 'dev_defaults' in spec else set()))
     for key in ['name','objective','audience']:text(spec[key],key,2000)
     require(spec['profile'] in {'business','software'},'Unsupported profile')
+    require(isinstance(spec.get('dev_defaults',True),bool),'dev_defaults must be true or false')
     strings(spec['constraints'],'constraints',minimum=0);strings(spec['success_criteria'],'success criteria')
+
+def skip_existing_defaults(target,files):
+    """Drop optional defaults that would collide with existing project content. Deterministic for a
+    given target: a default this kit already created matches its rendered bytes and stays in the plan."""
+    store=Store(target);skipped=[]
+    for relative in sorted(files):
+        if not relative.startswith(DEV_DEFAULTS):continue
+        try:
+            path=store.path(relative)
+            blocked=any(a.exists() and not a.is_dir() for a in path.parents if a!=target and a.is_relative_to(target))
+            if blocked or (path.exists() and store.read(relative)!=files[relative].encode()):skipped.append(relative)
+        except (Invalid,OSError):skipped.append(relative)
+    for relative in skipped:del files[relative]
+    return skipped
 
 def workspace_root(value):
     require(os.name=='posix', 'Initializer requires a POSIX filesystem; Windows support is not validated')
@@ -106,11 +125,12 @@ def preview(store,args):
     plan_path=store.path(args.plan)
     require(not plan_path.is_relative_to(target),'Plan must be outside target')
     pid=str(uuid.uuid4());timestamp=stamp();files=render(spec,pid,timestamp,scratch=store.path('.starter-work/render'))
+    skipped=skip_existing_defaults(target,files)
     plan={'schema':'starter-plan.v2','workspace':str(store.root),'Version-Timestamp':timestamp,'project_id':pid,'spec':spec,'target':args.target,
           'hashes':{k:digest(v.encode()) for k,v in files.items()}}
     plan['plan_id']=digest(encode(plan))
     store.create(args.plan,plan)
-    return {'plan':args.plan,'plan_id':plan['plan_id'],**classify(target,files),'existing_content':'Unrelated files preserved; content inventory remains a human/agent intake step.'}
+    return {'plan':args.plan,'plan_id':plan['plan_id'],**classify(target,files),'skipped_existing_defaults':skipped,'existing_content':'Unrelated files preserved; content inventory remains a human/agent intake step.'}
 
 def apply(store,args):
     plan=store.json(args.plan)
@@ -126,7 +146,8 @@ def apply(store,args):
         require(receipt.get('plan_id')==plan['plan_id'] and dst.manifest()['project_id']==plan['project_id'],'Different initialization exists; preserve and reconcile')
         return {'status':'already_initialized','project_id':plan['project_id'],'note':'Existing edits preserved; run resume and validate separately.'}
     files=render(plan['spec'],plan['project_id'],plan['Version-Timestamp'],scratch=store.path('.starter-work/render'))
-    require({k:digest(v.encode()) for k,v in files.items()}==plan['hashes'],'Template changed after preview; create a new plan')
+    skip_existing_defaults(target,files)
+    require({k:digest(v.encode()) for k,v in files.items()}==plan['hashes'],'Template or existing defaults changed after preview; create a new plan')
     result=classify(target,files);require(not result['conflicts'],'Target conflicts; no files applied. Review preview or use a new folder.')
     # Create-only publication. Repeating this same plan can complete matching partial output.
     for relative in sorted(files):

@@ -1,5 +1,15 @@
 # Release validation and acceptance limits
 
+## 0.9.0 release scope
+
+Version-Timestamp: 2026-11-26 11:08:42 AST
+
+This release adds optional development defaults for software projects: a CLAUDE.md that imports AGENTS.md on line 1, agent reference pages (plugin keep list with exact install and verification commands, token-use report routine, pull request review policy, CLAUDE.md pattern and rule inventory) and an optional code map with its helpers. They are previewed, skippable and never replace existing files. The business profile, and software projects that skip the defaults, render byte for byte as in 0.8.0.
+
+Local pre-release checks on macOS with Python 3.14: the source suite ran 323 tests with the 2 existing skips; one setup-wizard test failed only because the local checkout path contained the word it guards against, and passed from a neutral path. Twenty-four new tests cover the defaults, the opt-out, skipped collisions for new projects and adoption, the areas generator, the lock and build refusals, a spawned worker that cannot connect, and the hook. The hook was tested on macOS only. Package parity, learning gates and plugin manifest validation passed. The graph wrapper was smoke-tested on a synthetic fixture with a separately vetted graphify 0.9.70 runtime: symlinks were not followed, network calls were refused and another project's runtime was refused. Continuous integration and the anonymous public clone check run on the release candidate and the final release.
+
+The earlier release evidence below remains historical.
+
 ## 0.8.0 release scope
 
 Version-Timestamp: 2026-10-13 10:54:14 AST

@@ -1,0 +1,72 @@
+# Codebase map
+
+Version-Timestamp: {{ version_timestamp }}
+
+Where code lives and what it does, for people and agents. Read this before a broad search of the repository.
+
+## Find code fast
+
+1. **A behaviour or module.** [areas.md](areas.md), once generated, groups the code into areas, each with its folders, its key symbols (file and line) and the docs that explain it.
+2. **A name you already know.** Search for it directly, for example with `git grep -n NAME`, before you read whole folders.
+3. **A question across many files.** Ask the local graph in `graphify-out/` if it is built on your machine. It stays local and gitignored; `graphify-out/GRAPH_REPORT.md` is its readable summary.
+4. **Nothing generated yet.** Read the project README and the folder names, then search. The map is optional; the project works without it.
+
+## Files
+
+| File | What it is | How it is refreshed |
+| --- | --- | --- |
+| [areas.md](areas.md) | Code areas with folders, key symbols and the docs that explain them. Generated; never edit it by hand. | `python3 scripts/map/areas.py` |
+| [../../scripts/map/areas.py](../../scripts/map/areas.py) | Writes areas.md from the local graph, or from a plain scan of the code when no graph exists. Standard library only, no network. | Edit to change the page layout. |
+| [../../scripts/map/graph.py](../../scripts/map/graph.py) | Builds the local graph with this project's pinned graphify runtime, with the network blocked. | Run as below. |
+| [../../scripts/map/requirements.txt](../../scripts/map/requirements.txt) | The hash-locked package list for that runtime. Empty until someone vets and locks a version. | `graph.py lock` |
+| [../../scripts/map/post-commit.sample](../../scripts/map/post-commit.sample) | Optional hook that refreshes the map after each commit. Off until you install it. | Copy it into place, as below. |
+
+## Without a graph
+
+Run `python3 scripts/map/areas.py`. It groups code files by folder, picks the symbols the rest of the code mentions most, and links the Markdown docs that name each folder. Commit the new areas.md.
+
+## Optional: the graph runtime
+
+graphify builds a richer graph of calls and imports. Use it only through a runtime that belongs to this project: a virtual environment under the gitignored `.local/tools/`, installed from hash-locked files. Check that `.local/` and `graphify-out/` are ignored before you build: `git check-ignore -v .local/ graphify-out/` must print a rule for each (an adopted project may keep its own .gitignore without them). Never install graphify globally, never use a `/graphify` skill or a global `graphify` command, and never let another project's hooks run it here.
+
+One time setup, from the repository root. Replace `X.Y.Z` with the version your vetting log approves, and check the wheel hash against that entry.
+
+```sh
+python3 -m venv .local/tools/graphify-X.Y.Z
+.local/tools/graphify-X.Y.Z/bin/python -m pip download graphifyy==X.Y.Z --only-binary=:all: -d .local/tools/wheels-X.Y.Z
+shasum -a 256 .local/tools/wheels-X.Y.Z/graphifyy-X.Y.Z-*.whl
+python3 scripts/map/graph.py lock .local/tools/wheels-X.Y.Z
+.local/tools/graphify-X.Y.Z/bin/python -m pip install --no-index --no-deps --require-hashes --find-links .local/tools/wheels-X.Y.Z -r scripts/map/requirements.txt
+.local/tools/graphify-X.Y.Z/bin/python -m pip check
+```
+
+1. `pip download` is the only step that uses the network. Stop if the graphifyy hash differs from your vetting log.
+2. `graph.py lock` writes every downloaded wheel with its SHA-256 into requirements.txt. The lock is for this computer's platform and Python version; another platform downloads and locks its own.
+3. The install is offline and refuses any file whose hash differs. Run a vulnerability audit, such as pip-audit from its own separate environment, before the first build.
+
+Each rebuild:
+
+```sh
+.local/tools/graphify-X.Y.Z/bin/python -I scripts/map/graph.py build
+python3 scripts/map/areas.py
+```
+
+`build` refuses to run from any interpreter other than the pinned one started with `-I`, or when graphify would load from outside that environment. It blocks network connections for the whole run, including graphify's worker processes, does not follow symlinks and skips `.local/`, `.git/` and generated output. It writes `graphify-out/graph.json` and `graphify-out/GRAPH_REPORT.md`. Then areas.py rewrites areas.md from that graph.
+
+## Optional: refresh after each commit
+
+The hook is off by default. To turn it on for your clone:
+
+```sh
+hooks=$(git rev-parse --git-path hooks)
+cp scripts/map/post-commit.sample "$hooks/post-commit"
+chmod +x "$hooks/post-commit"
+```
+
+It runs only when the pinned runtime exists, in the background, so it never blocks or slows a commit, and it never touches the network. Its log is `.local/map-refresh.log`; a lock older than 30 minutes, left by a refresh that died, is cleared on the next commit. The hook has been tested on macOS only. It rebuilds the local graph and areas.md but does not commit them: review and commit areas.md yourself. Remove the hook file to turn it off. If the repository already has a post-commit hook or a hook manager, add the same lines to that instead.
+
+## Limits
+
+- Areas are groups of related code found by the graph or by folder, not modules someone designed. Their names come from their main folder and files.
+- A plain scan finds definitions by pattern, so it misses some symbols and may count a common word as a mention.
+- areas.md describes the commit named in its header. After large merges, rebuild it before trusting a file list.

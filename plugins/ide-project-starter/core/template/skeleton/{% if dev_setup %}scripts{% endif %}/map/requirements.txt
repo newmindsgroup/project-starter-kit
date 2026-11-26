@@ -1,0 +1,5 @@
+# Hash lock for the optional code map runtime. Empty on purpose.
+# Nothing installs from this file until someone vets a graphify version,
+# downloads its wheels and runs `python3 scripts/map/graph.py lock WHEEL_DIR`,
+# which replaces these lines with one `name==version --hash=sha256:...` per wheel.
+# See docs/map/README.md. Never install graphify globally.

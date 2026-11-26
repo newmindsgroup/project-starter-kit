@@ -10,8 +10,8 @@
     {
       "name": "ide-project-starter",
       "source": "./plugins/ide-project-starter",
-      "description": "Set up and resume projects with durable context and optional manual Project Blueprint metadata import and timers.",
-      "version": "0.8.0"
+      "description": "Set up and resume projects with durable context, optional development defaults for code projects, and optional manual Project Blueprint metadata import and timers.",
+      "version": "0.9.0"
     }
   ]
 }

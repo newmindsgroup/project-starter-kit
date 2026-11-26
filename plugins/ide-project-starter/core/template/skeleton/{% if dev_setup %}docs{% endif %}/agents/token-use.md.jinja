@@ -1,0 +1,32 @@
+# Token use report
+
+Version-Timestamp: {{ version_timestamp }}
+
+A regular look at where sessions spend tokens, so the biggest waste gets fixed first. It uses the session-report plugin ([claude-plugins.md](claude-plugins.md)).
+
+## Run it
+
+Once a week, from a folder outside every repository, for example `~/session-reports/`, ask Claude Code:
+
+> Use session-report for the last 7 days.
+
+The plugin reads the local session transcripts under `~/.claude/projects` for every project on this computer and saves an HTML file named `session-report-<date>.html` in the current folder. It sends nothing over the network; the page loads a web font when you open it.
+
+## Keep reports local
+
+- A report quotes prompts, file paths and project names. Never commit it, attach it to a client deliverable, paste it into an issue or publish it.
+- This project's .gitignore should ignore `session-report-*.html` in case one is saved here by mistake. Confirm it with `git check-ignore -v session-report-test.html`; an adopted project may keep its own .gitignore without the rule. Move such a file out of the repository.
+- Delete old reports when you no longer need them.
+
+## Act on the top items
+
+Read the findings at the top and the suggestions at the bottom. Fix the one or two largest items first, then compare next week's report.
+
+| Finding | Usual fix |
+| --- | --- |
+| One long session carries many unrelated jobs | Start a fresh session for each independent job. Save a checkpoint and resume instead of keeping one session open. |
+| Subagents use far more tokens per call than expected | Give each subagent a narrow brief: the goal, the files to read and the answer to return. Do not paste whole files into the brief. |
+| Large command output or file dumps fill the context | Keep big outputs in files and read only the part you need. Prefer a targeted search to a full listing. |
+| Frequent cache breaks | Read the report's cache-break list for the cause. Switching models in the middle of a session is a common one. |
+
+Record a lasting lesson with starter-review, so the fix survives the next session.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Version-Timestamp: 2026-09-11 14:52:59 AST
+# Version-Timestamp: 2026-11-26 11:08:42 AST
 """Adopt an existing project with create-only files and reviewed instruction appends."""
 import argparse
 import json
@@ -8,7 +8,7 @@ import sys
 import uuid
 from project_learning import Store, Invalid, require, fields, digest, encode, stamp, text, SECRET
 from project_memory import state_check, make_checkpoint
-from start_project import destination, workspace_root, render, spec_check, classify
+from start_project import destination, workspace_root, render, spec_check, classify, skip_existing_defaults
 
 PRESERVE={'README.md','PROJECT.md','QUALITY.md','context/index.md','business/work.md','software/work.md','.gitignore','.gitattributes'}
 ENTRY={'AGENTS.md','CLAUDE.md'}
@@ -45,6 +45,8 @@ def materialize(store,plan):
     del files['memory/checkpoints/0001.json']
     # Editor settings are a new-project default; adoption never imposes them on an existing application.
     files.pop('.editorconfig',None)
+    # Optional software defaults never replace or block the application's own files.
+    skipped=skip_existing_defaults(destination(store,plan['target']),files)
     append={}
     ignore_rules=files[".gitignore"] if ".gitignore" in plan["preserved"] else None
     attribute_rules=files[".gitattributes"] if ".gitattributes" in plan["preserved"] else None
@@ -59,7 +61,7 @@ def materialize(store,plan):
             block=sep+'<!-- STARTER ADOPTION '+plan['project_id']+' -->\n'+body+'\n<!-- END STARTER ADOPTION -->\n'
             append[name]=block
         del files[name]
-    return files,append,ignore_rules,attribute_rules
+    return files,append,ignore_rules,attribute_rules,skipped
 
 def verify_plan(store,relative):
     plan=argument_json(store,relative,'--plan')
@@ -70,8 +72,8 @@ def verify_plan(store,relative):
     spec_check(plan['brief']);state_check(plan['state'])
     dst=Store(destination(store,plan['target']))
     require(not store.path(relative).is_relative_to(dst.root),'Plan must be outside target')
-    files,append,ignore_rules,attribute_rules=materialize(store,plan)
-    require({k:digest(v.encode()) for k,v in files.items()}==plan['hashes'] and append==plan['append'],'Toolkit changed since preview; preserve partial output and reconcile')
+    files,append,ignore_rules,attribute_rules,_=materialize(store,plan)
+    require({k:digest(v.encode()) for k,v in files.items()}==plan['hashes'] and append==plan['append'],'Toolkit or an optional default changed since preview (for example an edited default file); preserve partial output and reconcile')
     return plan,dst,files,ignore_rules,attribute_rules
 
 def check_originals(dst,plan,finished=False):
@@ -101,11 +103,11 @@ def preview(store,args):
     plan={'schema':'adoption-plan.v1','workspace':str(store.root),'Version-Timestamp':stamp(),'project_id':str(uuid.uuid4()),'brief':payload['brief'],'state':payload['state'],'target':args.target,'preserved':preserved,'sources':selected_sources(dst,payload['state'])}
     # Instruction files change during the explicit merge, so cannot be baseline source inputs.
     require(not any(s['path'] in ENTRY for s in plan['sources']),'Use project/context documents as adoption sources, not instruction files being merged')
-    files,append,ignore_rules,attribute_rules=materialize(store,plan);result=classify(dst.root,files)
+    files,append,ignore_rules,attribute_rules,skipped=materialize(store,plan);result=classify(dst.root,files)
     require(not result['conflicts'] and not result['same'],'Owned path collision; preserve and prepare a manual migration')
     plan['hashes']={k:digest(v.encode()) for k,v in files.items()};plan['append']=append
     plan['plan_id']=digest(encode(plan));store.create(args.plan,plan)
-    return {'status':'previewed','plan':args.plan,'plan_id':plan['plan_id'],'create':sorted(files),'preserve':sorted(preserved),'review_and_append':append,'unapplied_ignore_rules':ignore_rules,'unapplied_attribute_rules':attribute_rules,'warning':'Plan contains reviewed project context and original instructions; keep it in an approved private workspace.'}
+    return {'status':'previewed','plan':args.plan,'plan_id':plan['plan_id'],'create':sorted(files),'preserve':sorted(preserved),'review_and_append':append,'unapplied_ignore_rules':ignore_rules,'unapplied_attribute_rules':attribute_rules,'skipped_existing_defaults':skipped,'warning':'Plan contains reviewed project context and original instructions; keep it in an approved private workspace.'}
 
 def apply(store,args):
     plan,dst,files,ignore_rules,attribute_rules=verify_plan(store,args.plan)
